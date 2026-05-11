@@ -2,16 +2,16 @@
 
 ## Idea Summary
 - Product: Google Privacy Repository
-- Goal: publish a stable public privacy policy URL for Public Offering Shares so it can be used in Google Play store listing and app content fields.
+- Goal: publish stable public privacy policy and support URLs for Public Offering Shares so they can be used in app store listing fields.
 - Core user: the app publisher preparing release materials.
 - Product promise: a simple public page with accurate disclosures and no hosting friction.
 
 ## MVP Scope
-- Core user problem: Google Play requires a public privacy policy URL, but the app currently has no published policy page.
+- Core user problem: app store submission requires public policy/support URLs, but the app publisher should not need a separate website stack.
 - Must-have flows:
-  - open the repository homepage and reach the nested policy path for the target app
-  - read a Play-compatible privacy policy for Public Offering Shares
-  - use the published URL in Play Console
+  - open the repository homepage and reach the nested policy and support paths for the target app
+  - read store-compatible privacy and support pages for Public Offering Shares
+  - use the published URLs in store submission fields
 - Out-of-scope items:
   - custom domain setup
   - multilingual localization
@@ -19,7 +19,9 @@
   - app runtime changes
 - Success criteria:
   - repository contains a public static privacy-policy page at `publicofferingshares/private-policy.html`
+  - repository contains a public static support page at `publicofferingshares/support.html`
   - policy names Public Offering Shares and reflects the stated app behavior
+  - support page clearly tells users how to contact the developer and where to find help
   - repository can be published with GitHub Pages
 
 ## Feature Specification
@@ -42,7 +44,18 @@
   - app name is explicit
   - contact/inquiry mechanism, retention/deletion, security, and sharing disclosures are included
 
-### 3. Publishing configuration
+### 3. Support page content
+- Purpose: provide an App Store compatible support destination for users who need help or want to report issues.
+- User interaction flow: open support URL -> see app purpose and help topics -> choose email or issue tracker contact path.
+- Data/state changes: none.
+- Error states: missing contact path, vague app identity, or dead navigation back to the policy page.
+- Acceptance criteria:
+  - page is labeled as support for Public Offering Shares
+  - support email and issue/contact path are visible
+  - page links to the privacy policy
+  - page is readable on mobile without scripts
+
+### 4. Publishing configuration
 - Purpose: make the page accessible through a public non-editable URL.
 - User interaction flow: repository is pushed -> GitHub Pages is enabled -> publisher receives live URL.
 - Data/state changes: GitHub repository and Pages settings are created remotely.
@@ -58,9 +71,9 @@
 | Google Privacy Repository                        |
 |--------------------------------------------------|
 | Public Offering Shares                          |
-| Public privacy policy for Google Play            |
+| Public policy and support pages for app stores   |
 |                                                  |
-| [ Read Privacy Policy ]                          |
+| [ Read Privacy Policy ]  [ Open Support Page ]   |
 +--------------------------------------------------+
 
 +--------------------------------------------------+
@@ -74,5 +87,15 @@
 | 6. Security                                      |
 | 7. Children's privacy                            |
 | 8. Contact                                       |
++--------------------------------------------------+
+
++--------------------------------------------------+
+| Support                                          |
+|--------------------------------------------------|
+| 1. What the app helps with                       |
+| 2. Frequently needed help topics                 |
+| 3. Email support                                 |
+| 4. GitHub issue/contact path                     |
+| 5. Privacy policy link                           |
 +--------------------------------------------------+
 ```
