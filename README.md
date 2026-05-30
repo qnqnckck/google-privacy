@@ -20,6 +20,6 @@
 - `index.html` - 간단한 랜딩 페이지
 - `publicofferingshares/private-policy.html` - 앱 개인정보처리방침 페이지
 - `publicofferingshares/support.html` - 앱 지원 페이지
-- `fate/private-policy.html` - Fate / 운명 개인정보처리방침 페이지
+- `fate/private-policy.html` - 운명/Fate/Schicksal/Destino/命运/運命 개인정보처리방침 페이지
 - `doc/mvp-plan.md` - 계획 문서
-- `doc/fate-privacy-policy-plan.md` - Fate / 운명 개인정보처리방침 계획 문서
+- `doc/fate-privacy-policy-plan.md` - 운명 다국어 개인정보처리방침 계획 문서
