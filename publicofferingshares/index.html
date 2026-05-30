@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="공모주비서 - 공모주 일정, 청약 분석, 포트폴리오 기록, 알림을 한 곳에서 관리하는 로컬 중심 앱">
+    <title>공모주비서 - 공모주 일정과 청약 기록을 한 곳에서</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #fff8df;
+        --paper: #fffdf6;
+        --paper-strong: #fff3b8;
+        --ink: #1f2933;
+        --muted: #667085;
+        --line: #eadfbd;
+        --accent: #f4c430;
+        --accent-strong: #12695f;
+        --green-soft: #dff5ee;
+        --red-soft: #ffe3df;
+        --blue-soft: #e4efff;
+        --shadow: 0 20px 48px rgba(70, 62, 34, 0.13);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, #fff6d2 0%, #f8f5ec 58%, #eef7f4 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 28px 20px 72px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 10px 0 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        box-shadow: 0 8px 18px rgba(31, 41, 51, 0.12);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+        gap: 28px;
+        align-items: center;
+        min-height: 600px;
+      }
+
+      .hero-copy {
+        padding: 36px 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: var(--paper-strong);
+        border: 1px solid #ebd47b;
+        color: #745600;
+        font-size: 0.92rem;
+        font-weight: 900;
+      }
+
+      h1 {
+        margin: 20px 0 16px;
+        max-width: 760px;
+        font-size: clamp(2.6rem, 7vw, 5.2rem);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 650px;
+        margin: 0;
+        color: #344054;
+        font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+        line-height: 1.7;
+        font-weight: 700;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 13px 18px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      .button-primary {
+        background: var(--ink);
+        color: white;
+      }
+
+      .button-secondary {
+        border: 1px solid var(--line);
+        background: rgba(255, 253, 246, 0.82);
+        color: var(--ink);
+      }
+
+      .phone-board {
+        position: relative;
+        padding: 22px;
+        border-radius: 34px;
+        background: linear-gradient(160deg, #202833 0%, #111827 100%);
+        box-shadow: var(--shadow);
+      }
+
+      .phone-screen {
+        min-height: 520px;
+        padding: 22px;
+        border-radius: 24px;
+        background: #fff9e7;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .screen-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .screen-header img {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+      }
+
+      .screen-header strong {
+        display: block;
+        font-size: 1.08rem;
+      }
+
+      .screen-header span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .calendar-card {
+        padding: 16px;
+        border-radius: 20px;
+        background: white;
+        border: 1px solid #eee2bd;
+      }
+
+      .month {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        font-weight: 900;
+      }
+
+      .week {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 7px;
+      }
+
+      .day {
+        min-height: 58px;
+        padding: 7px;
+        border-radius: 13px;
+        background: #f8fafc;
+        border: 1px solid #edf1f5;
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .pill {
+        display: block;
+        margin-top: 6px;
+        padding: 4px 6px;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .pill-sub { background: var(--red-soft); color: #9f2f24; }
+      .pill-list { background: var(--green-soft); color: #0f665d; }
+      .pill-refund { background: var(--blue-soft); color: #1d5aa6; }
+
+      .summary-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .metric {
+        padding: 12px;
+        border-radius: 16px;
+        background: #111827;
+        color: white;
+      }
+
+      .metric span {
+        display: block;
+        color: #cbd5e1;
+        font-size: 0.74rem;
+        font-weight: 800;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 1.05rem;
+      }
+
+      .section {
+        padding: 34px 0 0;
+      }
+
+      .section h2 {
+        margin: 0 0 12px;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        line-height: 1.15;
+      }
+
+      .section-lead {
+        max-width: 700px;
+        margin: 0;
+        color: var(--muted);
+        font-weight: 700;
+        line-height: 1.7;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .feature {
+        min-height: 178px;
+        padding: 18px;
+        border-radius: 20px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 28px rgba(68, 61, 39, 0.07);
+      }
+
+      .feature .mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 13px;
+        background: var(--accent);
+        font-weight: 900;
+      }
+
+      .feature h3 {
+        margin: 14px 0 8px;
+        font-size: 1.05rem;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .notice {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.6fr);
+        gap: 16px;
+        align-items: stretch;
+        margin-top: 22px;
+      }
+
+      .notice-card {
+        padding: 22px;
+        border-radius: 22px;
+        background: #102a2a;
+        color: white;
+      }
+
+      .notice-card p {
+        margin: 0;
+        color: #d9f0ed;
+        line-height: 1.7;
+        font-weight: 700;
+      }
+
+      .links-card {
+        padding: 22px;
+        border-radius: 22px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+      }
+
+      .links-card a {
+        display: block;
+        padding: 12px 0;
+        font-weight: 900;
+        text-decoration: none;
+        border-bottom: 1px solid #eee4c8;
+      }
+
+      .links-card a:last-child {
+        border-bottom: 0;
+      }
+
+      footer {
+        margin-top: 44px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 860px) {
+        .hero,
+        .notice {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .phone-board {
+          padding: 14px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page {
+          padding: 18px 14px 54px;
+        }
+
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero {
+          min-height: auto;
+          gap: 18px;
+        }
+
+        .hero-copy {
+          padding: 18px 0 6px;
+        }
+
+        .feature-grid,
+        .summary-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .phone-screen {
+          min-height: 460px;
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <nav class="nav" aria-label="공모주비서 링크">
+        <div class="brand">
+          <img src="./assets/app-icon.png" alt="공모주비서 앱 아이콘">
+          <span>공모주비서</span>
+        </div>
+        <div class="nav-links">
+          <a href="./private-policy.html">개인정보처리방침</a>
+          <a href="./support.html">지원</a>
+          <a href="mailto:qnqnqnckck@gmail.com">문의</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">공모주 일정과 청약 기록을 한 곳에서</span>
+          <h1>놓치기 쉬운 공모주 흐름을 조용히 정리합니다.</h1>
+          <p class="lead">
+            공모주비서는 청약, 환불, 상장 일정을 캘린더로 확인하고 내 청약 기록과 예상 손익을 로컬 중심으로 관리하는 공모주 도우미 앱입니다.
+          </p>
+          <div class="actions">
+            <a class="button button-primary" href="./support.html">지원 페이지 보기</a>
+            <a class="button button-secondary" href="./private-policy.html">개인정보처리방침</a>
+          </div>
+        </div>
+
+        <div class="phone-board" aria-label="공모주비서 앱 화면 예시">
+          <div class="phone-screen">
+            <div class="screen-header">
+              <img src="./assets/app-icon.png" alt="">
+              <div>
+                <strong>이번 달 공모 일정</strong>
+                <span>청약, 환불, 상장 주요 흐름</span>
+              </div>
+            </div>
+
+            <div class="calendar-card">
+              <div class="month">
+                <span>2026.05</span>
+                <span>월-금 보기</span>
+              </div>
+              <div class="week">
+                <div class="day">월<span class="pill pill-sub">청약</span></div>
+                <div class="day">화<span class="pill pill-refund">환불</span></div>
+                <div class="day">수</div>
+                <div class="day">목<span class="pill pill-list">상장</span></div>
+                <div class="day">금<span class="pill pill-sub">수요예측</span></div>
+                <div class="day">월</div>
+                <div class="day">화<span class="pill pill-sub">청약</span></div>
+                <div class="day">수</div>
+                <div class="day">목<span class="pill pill-refund">환불</span></div>
+                <div class="day">금</div>
+              </div>
+            </div>
+
+            <div class="summary-strip">
+              <div class="metric">
+                <span>이번 주</span>
+                <strong>4건</strong>
+              </div>
+              <div class="metric">
+                <span>기록</span>
+                <strong>로컬</strong>
+              </div>
+              <div class="metric">
+                <span>알림</span>
+                <strong>D-day</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>공모주 확인에 필요한 화면을 작게 묶었습니다.</h2>
+        <p class="section-lead">
+          매번 흩어진 일정과 기록을 다시 찾지 않도록, 청약 전 판단부터 참여 기록과 매도 후 손익까지 한 앱 안에서 이어집니다.
+        </p>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <span class="mark">1</span>
+            <h3>월간 일정 캘린더</h3>
+            <p>청약, 환불, 상장, 수요예측 일정을 월 단위로 빠르게 훑어봅니다.</p>
+          </article>
+          <article class="feature">
+            <span class="mark">2</span>
+            <h3>청약 전 체크</h3>
+            <p>경쟁률, 공모가, 주관사 정보를 바탕으로 참여 전 확인할 내용을 정리합니다.</p>
+          </article>
+          <article class="feature">
+            <span class="mark">3</span>
+            <h3>포트폴리오 기록</h3>
+            <p>청약, 배정, 매도 기록을 남기고 누적 손익을 확인합니다.</p>
+          </article>
+          <article class="feature">
+            <span class="mark">4</span>
+            <h3>알림과 공유</h3>
+            <p>중요 일정 알림을 받고, 월간 일정 이미지를 저장하거나 공유합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="notice">
+          <div class="notice-card">
+            <h2>로컬 중심으로 설계했습니다.</h2>
+            <p>
+              사용자의 청약 기록과 설정은 기기 중심으로 관리됩니다. 앱은 공모주 일정과 공개 데이터를 더 쉽게 확인하기 위한 도구이며, 투자 판단은 사용자가 직접 결정해야 합니다.
+            </p>
+          </div>
+          <div class="links-card">
+            <a href="./private-policy.html">개인정보처리방침</a>
+            <a href="./support.html">지원 페이지</a>
+            <a href="mailto:qnqnqnckck@gmail.com">개발자에게 문의</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>공모주비서 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다.</p>
+      </footer>
+    </main>
+  </body>
+</html>
