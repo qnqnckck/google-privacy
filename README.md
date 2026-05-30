@@ -1,6 +1,6 @@
 # Google Privacy Repository
 
-**공모주앱**용 공개 개인정보처리방침 사이트입니다.
+앱 스토어 제출용 공개 개인정보처리방침과 지원 페이지를 호스팅하는 정적 사이트입니다.
 
 ## Live policy
 
@@ -9,6 +9,7 @@
 - `https://qnqnckck.github.io/google-privacy/`
 - `https://qnqnckck.github.io/google-privacy/publicofferingshares/private-policy.html`
 - `https://qnqnckck.github.io/google-privacy/publicofferingshares/support.html`
+- `https://qnqnckck.github.io/google-privacy/fate/private-policy.html`
 
 ## 목적
 
@@ -19,4 +20,6 @@
 - `index.html` - 간단한 랜딩 페이지
 - `publicofferingshares/private-policy.html` - 앱 개인정보처리방침 페이지
 - `publicofferingshares/support.html` - 앱 지원 페이지
+- `fate/private-policy.html` - Fate / 운명 개인정보처리방침 페이지
 - `doc/mvp-plan.md` - 계획 문서
+- `doc/fate-privacy-policy-plan.md` - Fate / 운명 개인정보처리방침 계획 문서
