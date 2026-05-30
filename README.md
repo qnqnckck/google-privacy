@@ -10,6 +10,7 @@
 - `https://qnqnckck.github.io/google-privacy/publicofferingshares/private-policy.html`
 - `https://qnqnckck.github.io/google-privacy/publicofferingshares/support.html`
 - `https://qnqnckck.github.io/google-privacy/fate/private-policy.html`
+- `https://qnqnckck.github.io/google-privacy/fate/support.html`
 
 ## 목적
 
@@ -21,5 +22,6 @@
 - `publicofferingshares/private-policy.html` - 앱 개인정보처리방침 페이지
 - `publicofferingshares/support.html` - 앱 지원 페이지
 - `fate/private-policy.html` - 운명 다국어 개인정보처리방침 페이지
+- `fate/support.html` - 운명 다국어 지원 페이지
 - `doc/mvp-plan.md` - 계획 문서
 - `doc/fate-privacy-policy-plan.md` - 운명 다국어 개인정보처리방침 계획 문서
