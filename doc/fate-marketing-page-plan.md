@@ -28,6 +28,7 @@
 
 - `fate/index.html`이 정적 HTML로 렌더링된다.
 - 앱 아이콘 이미지가 `fate/assets/app-icon.png`로 표시된다.
+- 실제 앱 화면 캡처가 `fate/assets/app-home.png`, `fate/assets/app-tarot.png`, `fate/assets/app-zodiac.png`로 표시된다.
 - 개인정보처리방침, 지원, 이메일 링크가 정상 연결된다.
 
 ## Feature Specification
@@ -36,7 +37,7 @@
 
 - Purpose: 앱의 운세 리딩 기능과 로컬 중심 개인정보 방향을 공개 페이지로 소개한다.
 - User Interaction Flow: 사용자는 스토어의 Marketing URL에서 앱 소개, 주요 기능, 로컬 저장 안내, 정책/지원 링크를 확인한다.
-- Data/State Changes: 정적 HTML과 앱 아이콘 자산만 추가된다.
+- Data/State Changes: 정적 HTML, 앱 아이콘, 실제 앱 화면 캡처 자산이 추가된다.
 - Error States: 링크 경로가 깨지면 스토어 사용자와 심사자가 정책/지원 페이지에 접근할 수 없다.
 - Acceptance Criteria: 상대 링크와 이미지가 모두 존재하고 HTML 파싱 오류가 없다.
 
@@ -53,10 +54,14 @@
   Sticky header
   Hero gold fortune card
   Quick links
+  Actual app screenshots
   Reading modes
-  Feature grid
   Local-first notice
   Policy/support links
+
+[Desktop QR]
+  Marketing URL QR
+  URL label
 ```
 
 ## Visual Direction
@@ -65,4 +70,6 @@
 - Structure: 점신 참고처럼 데스크톱은 좌측 브랜드 메시지, 우측은 모바일 앱 화면 프레임으로 구성한다.
 - Palette: 앱 토큰의 warm paper background, oracle night, oracle gold를 중심으로 사용한다.
 - Primitives: fortune card, seal badge, reading mode tile, saved reading strip, policy link row.
+- App proof: 실제 앱 캡처를 큰 홈 화면 1개와 보조 리딩 화면 2개로 배치한다.
+- Marketing URL QR: 스토어 ID가 확정되지 않은 상태에서는 QR을 마케팅 페이지 자체로 연결한다.
 - Risk: 실제 점술 정확도나 미래 보장을 암시하지 않고, 사용자가 리딩을 탐색/기록하는 앱으로 표현한다.
