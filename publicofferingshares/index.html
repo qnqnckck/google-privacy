@@ -596,7 +596,7 @@
           color: inherit;
         }
 
-      .aside-actions {
+        .aside-actions {
           display: flex;
           gap: 10px;
           margin-top: 34px;
@@ -621,20 +621,24 @@
         }
 
         .download-panel {
+          position: fixed;
+          left: calc(50% + 310px);
+          bottom: 88px;
+          z-index: 30;
+          width: 200px;
           display: flex;
+          flex-direction: column;
           align-items: center;
-          gap: 14px;
-          max-width: 540px;
-          margin-top: 22px;
-          padding: 18px;
+          gap: 12px;
+          padding: 16px;
           border-radius: 12px;
           background: var(--surface);
           box-shadow: var(--shadow);
         }
 
         .qr-card {
-          width: 112px;
-          height: 112px;
+          width: 148px;
+          height: 148px;
           flex: 0 0 auto;
           display: flex;
           align-items: center;
@@ -654,27 +658,27 @@
 
         .store-links {
           display: grid;
-          gap: 8px;
-          flex: 1;
+          gap: 6px;
+          width: 100%;
+          text-align: center;
         }
 
         .store-links strong {
           display: block;
-          font-size: 1rem;
+          font-size: 0.95rem;
         }
 
         .store-links span {
           display: block;
           margin-top: 4px;
           color: var(--muted);
-          font-size: 0.84rem;
+          font-size: 0.76rem;
           font-weight: 700;
         }
 
         .store-button-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
+          display: grid;
+          gap: 7px;
           margin-top: 8px;
         }
 
@@ -682,6 +686,7 @@
           min-height: 38px;
           display: inline-flex;
           align-items: center;
+          justify-content: center;
           padding: 0 12px;
           border-radius: 9px;
           background: #1f2024;
@@ -721,6 +726,20 @@
           grid-column: 2;
           margin: 0;
           box-shadow: 0 0 0 1px #efefef;
+        }
+      }
+
+      @media (min-width: 960px) and (max-width: 1320px) {
+        .download-panel {
+          left: auto;
+          right: 18px;
+          bottom: 72px;
+          width: 176px;
+        }
+
+        .qr-card {
+          width: 128px;
+          height: 128px;
         }
       }
 
