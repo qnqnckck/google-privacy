@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="운명/Fate - 사주, 타로, 궁합, 별자리, 손금, 관상, 오늘 운세를 기기 중심으로 관리하는 로컬 우선 운세 앱">
-    <title>운명 - 사주와 타로를 기록하는 운세 노트</title>
+    <meta name="description" content="운명/Fate - 사주, 타로, 손금, 궁합, 별자리, 주역, 전생, 팬심까지 나를 위한 운세를 한 곳에서 확인하는 로컬 우선 운세 앱">
+    <title>운명 - 나를 위한 모든 운세를 한 곳에서</title>
     <style>
       :root {
         color-scheme: light;
@@ -91,6 +91,25 @@
         height: 38px;
         border-radius: 13px;
         box-shadow: var(--shadow);
+      }
+
+      .header-tools {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .language-select {
+        height: 34px;
+        max-width: 104px;
+        border: 1px solid rgba(216, 207, 193, 0.9);
+        border-radius: 999px;
+        background: var(--paper-strong);
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 900;
+        padding: 0 8px;
       }
 
       .header-action {
@@ -330,31 +349,25 @@
 
       .phone-shot img {
         width: 100%;
-        aspect-ratio: 9 / 16;
         display: block;
-        object-fit: cover;
-        object-position: top center;
       }
 
-      .screen-row {
+      .store-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
       }
 
-      .mini-shot {
+      .store-shot {
         border: 1px solid rgba(216, 207, 193, 0.82);
-        border-radius: 24px;
+        border-radius: 22px;
         background: #fffaf2;
         overflow: hidden;
       }
 
-      .mini-shot img {
+      .store-shot img {
         width: 100%;
-        aspect-ratio: 9 / 15.8;
         display: block;
-        object-fit: cover;
-        object-position: top center;
       }
 
       .mode-grid {
@@ -411,6 +424,46 @@
         border-radius: 22px;
         background: var(--navy);
         color: #fff;
+      }
+
+      .language-card {
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(216, 207, 193, 0.78);
+        background: var(--paper-strong);
+        box-shadow: var(--shadow);
+      }
+
+      .language-card p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 800;
+        line-height: 1.5;
+      }
+
+      .language-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .language-pills button {
+        min-height: 34px;
+        border: 1px solid rgba(216, 207, 193, 0.9);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 900;
+        padding: 0 11px;
+      }
+
+      .language-pills button.active {
+        border-color: rgba(151, 102, 48, 0.32);
+        background: var(--gold-soft);
+        color: #4b3215;
       }
 
       .notice-card h2 {
@@ -636,7 +689,7 @@
         .hero-proof,
         .quick-grid,
         .mode-grid,
-        .screen-row {
+        .store-grid {
           grid-template-columns: 1fr;
         }
 
@@ -650,19 +703,19 @@
     <main class="layout">
       <aside class="aside" aria-label="운명 앱 소개">
         <img class="aside-logo" src="./assets/app-icon.png" alt="운명 앱 아이콘">
-        <p class="aside-intro">사주와 타로를 기록하는 로컬 운세 노트</p>
+        <p class="aside-intro" data-i18n="asideIntro">나를 위한 운세를 한 곳에서 확인하는 앱</p>
         <h2>
-          오늘의 흐름부터<br>
-          깊은 리딩까지<br>
-          <mark>운명</mark>에서
+          <span data-i18n="asideLine1">사주부터 팬심까지</span><br>
+          <span data-i18n="asideLine2">매일의 운세를</span><br>
+          <mark data-i18n="brandMark">운명</mark><span data-i18n="asideLine3">에서</span>
         </h2>
         <div class="aside-actions">
-          <a href="./support.html">지원 페이지</a>
-          <a href="./private-policy.html">개인정보처리방침</a>
+          <a href="./support.html" data-i18n="supportPage">지원 페이지</a>
+          <a href="./private-policy.html" data-i18n="privacyPolicy">개인정보처리방침</a>
         </div>
         <div class="aside-note">
-          <strong>App Store Marketing URL용 공식 소개 페이지</strong>
-          <span>사주, 타로, 궁합, 별자리, 손금과 관상 리딩을 한 화면에서 확인할 수 있습니다.</span>
+          <strong data-i18n="asideNoteTitle">App Store Marketing URL용 공식 소개 페이지</strong>
+          <span data-i18n="asideNoteBody">사주, 타로, 손금, 궁합, 별자리, 주역, 전생, 팬심과 홈 위젯 흐름을 실제 스토어 화면 기준으로 확인할 수 있습니다.</span>
         </div>
       </aside>
 
@@ -670,22 +723,32 @@
         <header class="app-header">
           <a class="brand" href="./">
             <img src="./assets/app-icon.png" alt="운명 앱 아이콘">
-            <span>운명</span>
+            <span data-i18n="appName">운명</span>
           </a>
-          <a class="header-action" href="./support.html">지원</a>
+          <div class="header-tools">
+            <select class="language-select" id="languageSelect" aria-label="언어 선택">
+              <option value="ko">한국어</option>
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+              <option value="zh">中文</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="pt">Português</option>
+            </select>
+            <a class="header-action" href="./support.html" data-i18n="supportShort">지원</a>
+          </div>
         </header>
 
         <div class="content">
           <section class="hero-card">
-            <span class="eyebrow">Fate reading folio</span>
-            <h1>사주와 타로를 한 장의 운세 카드처럼.</h1>
-            <p class="lead">
-              운명은 사주, 타로, 궁합, 오늘 운세와 저장한 리딩을 기기 중심으로 관리하는 로컬 우선 운세 앱입니다.
-            </p>
+            <span class="eyebrow" data-i18n="eyebrow">All-in-one fortune folio</span>
+            <h1 data-i18n="heroTitle">나를 위한 모든 운세를 한 곳에서.</h1>
+            <p class="lead" data-i18n="heroLead">운명은 사주, 타로, 손금, 궁합, 별자리, 주역, 전생, 팬심과 오늘의 운세를 나에게 맞춰 확인하는 로컬 우선 운세 앱입니다.</p>
             <div class="hero-proof">
               <div class="proof-note">
-                <span>오늘의 리딩</span>
-                <strong>내 흐름을 가볍게 확인하고 필요한 리딩을 남겨보세요.</strong>
+                <span data-i18n="proofLabel">오늘의 운세</span>
+                <strong data-i18n="proofText">매일의 흐름을 확인하고 필요한 리딩을 다시 열어보세요.</strong>
               </div>
               <div class="icon-tile">
                 <img src="./assets/app-icon.png" alt="">
@@ -695,112 +758,135 @@
 
           <nav class="quick-grid" aria-label="핵심 섹션 바로 보기">
             <a class="quick-tile" href="#screens">
-              <span>화면</span>
-              <strong>앱 미리보기</strong>
+              <span data-i18n="quickScreenLabel">화면</span>
+              <strong data-i18n="quickScreen">앱 미리보기</strong>
             </a>
             <a class="quick-tile" href="#modes">
-              <span>리딩</span>
-              <strong>주요 모드</strong>
+              <span data-i18n="quickModeLabel">리딩</span>
+              <strong data-i18n="quickMode">주요 모드</strong>
             </a>
             <a class="quick-tile" href="#links">
-              <span>안내</span>
-              <strong>정책/지원</strong>
+              <span data-i18n="quickInfoLabel">안내</span>
+              <strong data-i18n="quickInfo">정책/지원</strong>
             </a>
           </nav>
 
           <section id="screens" class="section">
             <div class="section-title">
-              <h2>앱 미리보기</h2>
-              <span>실제 화면 기반</span>
+              <h2 data-i18n="screensTitle">앱 미리보기</h2>
+              <span data-i18n="screensMeta">실제 스토어 화면</span>
             </div>
 
             <article class="screen-card">
               <div class="screen-head">
                 <div>
-                  <strong>홈과 사주 리딩</strong>
-                  <span>오늘 운세, 대상자, 사주/타로/궁합 선택</span>
+                  <strong data-i18n="homeShotTitle">홈과 전체 운세</strong>
+                  <span data-i18n="homeShotText">오늘 운세와 주요 운세 모드를 한 화면에서 확인</span>
                 </div>
                 <span class="badge">Home</span>
               </div>
               <div class="phone-shot">
-                <img src="./assets/app-home.png" alt="운명 앱 홈 화면">
+                <img src="./assets/store-1.png" alt="운명 앱 홈 화면과 주요 운세 기능">
               </div>
             </article>
 
             <article class="screen-card">
               <div class="screen-head">
                 <div>
-                  <strong>사주, 타로, 별자리</strong>
-                  <span>주요 리딩 진입과 전문 지표 화면</span>
+                  <strong data-i18n="storeShotTitle">스토어 화면 미리보기</strong>
+                  <span data-i18n="storeShotText">팬심, 오늘 운세, 주역, 궁합, 전생, 위젯 화면</span>
                 </div>
-                <span class="badge">Reading</span>
+                <span class="badge">Screens</span>
               </div>
-              <div class="screen-row">
-                <div class="mini-shot">
-                  <img src="./assets/app-saju.png" alt="운명 앱 사주 리딩 화면">
+              <div class="store-grid">
+                <div class="store-shot">
+                  <img src="./assets/store-2.png" alt="운명 앱 팬심과 출석 체크 화면">
                 </div>
-                <div class="mini-shot">
-                  <img src="./assets/app-tarot.png" alt="운명 앱 타로 리딩 화면">
+                <div class="store-shot">
+                  <img src="./assets/store-3.png" alt="운명 앱 오늘의 운세 화면">
                 </div>
-                <div class="mini-shot">
-                  <img src="./assets/app-zodiac.png" alt="운명 앱 별자리 리딩 화면">
+                <div class="store-shot">
+                  <img src="./assets/store-4.png" alt="운명 앱 주역과 별자리 화면">
+                </div>
+                <div class="store-shot">
+                  <img src="./assets/store-5.png" alt="운명 앱 궁합 화면">
+                </div>
+                <div class="store-shot">
+                  <img src="./assets/store-6.png" alt="운명 앱 전생 화면">
+                </div>
+                <div class="store-shot">
+                  <img src="./assets/store-7.png" alt="운명 앱 홈화면 위젯 화면">
                 </div>
               </div>
             </article>
           </section>
 
+          <section class="section" aria-label="지원 언어">
+            <div class="language-card">
+              <p data-i18n="languageNote">앱과 소개 페이지는 한국어, 영어, 일본어, 중국어, 스페인어, 프랑스어, 독일어, 포르투갈어 표시를 지원합니다.</p>
+              <div class="language-pills" aria-label="언어 바로 변경">
+                <button type="button" data-lang-button="ko">한국어</button>
+                <button type="button" data-lang-button="en">English</button>
+                <button type="button" data-lang-button="ja">日本語</button>
+                <button type="button" data-lang-button="zh">中文</button>
+                <button type="button" data-lang-button="es">Español</button>
+                <button type="button" data-lang-button="fr">Français</button>
+                <button type="button" data-lang-button="de">Deutsch</button>
+                <button type="button" data-lang-button="pt">Português</button>
+              </div>
+            </div>
+          </section>
+
           <section id="modes" class="section">
             <div class="section-title">
-              <h2>주요 리딩</h2>
+              <h2 data-i18n="modesTitle">주요 리딩</h2>
               <span>Local-first</span>
             </div>
             <div class="mode-grid">
               <article class="mode-card">
                 <mark>사</mark>
-                <h3>사주와 오늘 운세</h3>
-                <p>출생 프로필을 바탕으로 오늘의 흐름과 기본 사주 리딩을 확인합니다.</p>
+                <h3 data-i18n="mode1Title">사주와 오늘 운세</h3>
+                <p data-i18n="mode1Text">출생 프로필을 바탕으로 오늘의 흐름과 리듬 점수를 확인합니다.</p>
               </article>
               <article class="mode-card">
-                <mark>타</mark>
-                <h3>타로 리딩</h3>
-                <p>질문에 맞는 카드 흐름을 뽑고 결과를 저장하거나 공유합니다.</p>
+                <mark>손</mark>
+                <h3 data-i18n="mode2Title">손금과 별자리</h3>
+                <p data-i18n="mode2Text">손금, 별자리, 주역처럼 상황에 맞는 리딩을 골라 봅니다.</p>
               </article>
               <article class="mode-card">
                 <mark>궁</mark>
-                <h3>궁합과 관계</h3>
-                <p>두 프로필의 관계 흐름을 비교하고 중요한 포인트를 정리합니다.</p>
+                <h3 data-i18n="mode3Title">궁합과 관계</h3>
+                <p data-i18n="mode3Text">두 프로필의 관계 흐름을 비교하고 중요한 포인트를 정리합니다.</p>
               </article>
               <article class="mode-card">
-                <mark>별</mark>
-                <h3>확장 리딩</h3>
-                <p>별자리, 토정비결, 주역, 손금, 관상, 전생 리딩을 탐색합니다.</p>
+                <mark>팬</mark>
+                <h3 data-i18n="mode4Title">팬심과 전생</h3>
+                <p data-i18n="mode4Text">팬심 컨디션과 출석 체크, 전생 리딩까지 가볍게 탐색합니다.</p>
               </article>
             </div>
           </section>
 
           <section class="section">
             <div class="notice-card">
-              <h2>기기 중심으로 설계했습니다.</h2>
-              <p>
-                프로필, 리딩 기록, 앱 설정은 기본적으로 사용자의 기기 안에 저장됩니다. 손금과 관상 기능의 사진은 사용자가 선택한 경우에만 앱 기능에 사용됩니다.
-              </p>
+              <h2 data-i18n="privacyTitle">기기 중심으로 설계했습니다.</h2>
+              <p data-i18n="privacyText">프로필, 리딩 기록, 앱 설정은 기본적으로 사용자의 기기 안에 저장됩니다. 손금 등 사진 기반 기능은 사용자가 선택한 경우에만 앱 기능에 사용됩니다.</p>
             </div>
           </section>
 
           <section id="links" class="section">
             <div class="section-title">
-              <h2>공식 안내</h2>
+              <h2 data-i18n="linksTitle">공식 안내</h2>
               <span>Policy & Support</span>
             </div>
             <div class="link-card">
-              <a href="./private-policy.html">개인정보처리방침</a>
-              <a href="./support.html">지원 페이지</a>
-              <a href="mailto:qnqnqnckck@gmail.com">개발자에게 문의</a>
+              <a href="./private-policy.html" data-i18n="privacyPolicy">개인정보처리방침</a>
+              <a href="./support.html" data-i18n="supportPage">지원 페이지</a>
+              <a href="mailto:qnqnqnckck@gmail.com" data-i18n="contactDeveloper">개발자에게 문의</a>
             </div>
           </section>
 
           <footer>
-            <p>운명/Fate 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다.</p>
+            <p data-i18n="footerText">운명/Fate 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다.</p>
           </footer>
         </div>
       </section>
@@ -812,5 +898,279 @@
         <span>Marketing URL<br>qnqnckck.github.io/google-privacy/fate/</span>
       </aside>
     </main>
+    <script>
+      const translations = {
+        ko: {
+          appName: "운명",
+          supportShort: "지원",
+          supportPage: "지원 페이지",
+          privacyPolicy: "개인정보처리방침",
+          contactDeveloper: "개발자에게 문의",
+          asideIntro: "나를 위한 운세를 한 곳에서 확인하는 앱",
+          asideLine1: "사주부터 팬심까지",
+          asideLine2: "매일의 운세를",
+          asideLine3: "에서",
+          brandMark: "운명",
+          asideNoteTitle: "App Store Marketing URL용 공식 소개 페이지",
+          asideNoteBody: "사주, 타로, 손금, 궁합, 별자리, 주역, 전생, 팬심과 홈 위젯 흐름을 실제 스토어 화면 기준으로 확인할 수 있습니다.",
+          eyebrow: "All-in-one fortune folio",
+          heroTitle: "나를 위한 모든 운세를 한 곳에서.",
+          heroLead: "운명은 사주, 타로, 손금, 궁합, 별자리, 주역, 전생, 팬심과 오늘의 운세를 나에게 맞춰 확인하는 로컬 우선 운세 앱입니다.",
+          proofLabel: "오늘의 운세",
+          proofText: "매일의 흐름을 확인하고 필요한 리딩을 다시 열어보세요.",
+          quickScreenLabel: "화면",
+          quickScreen: "앱 미리보기",
+          quickModeLabel: "리딩",
+          quickMode: "주요 모드",
+          quickInfoLabel: "안내",
+          quickInfo: "정책/지원",
+          screensTitle: "앱 미리보기",
+          screensMeta: "실제 스토어 화면",
+          homeShotTitle: "홈과 전체 운세",
+          homeShotText: "오늘 운세와 주요 운세 모드를 한 화면에서 확인",
+          storeShotTitle: "스토어 화면 미리보기",
+          storeShotText: "팬심, 오늘 운세, 주역, 궁합, 전생, 위젯 화면",
+          languageNote: "앱과 소개 페이지는 한국어, 영어, 일본어, 중국어, 스페인어, 프랑스어, 독일어, 포르투갈어 표시를 지원합니다.",
+          modesTitle: "주요 리딩",
+          mode1Title: "사주와 오늘 운세",
+          mode1Text: "출생 프로필을 바탕으로 오늘의 흐름과 리듬 점수를 확인합니다.",
+          mode2Title: "손금과 별자리",
+          mode2Text: "손금, 별자리, 주역처럼 상황에 맞는 리딩을 골라 봅니다.",
+          mode3Title: "궁합과 관계",
+          mode3Text: "두 프로필의 관계 흐름을 비교하고 중요한 포인트를 정리합니다.",
+          mode4Title: "팬심과 전생",
+          mode4Text: "팬심 컨디션과 출석 체크, 전생 리딩까지 가볍게 탐색합니다.",
+          privacyTitle: "기기 중심으로 설계했습니다.",
+          privacyText: "프로필, 리딩 기록, 앱 설정은 기본적으로 사용자의 기기 안에 저장됩니다. 손금 등 사진 기반 기능은 사용자가 선택한 경우에만 앱 기능에 사용됩니다.",
+          linksTitle: "공식 안내",
+          footerText: "운명/Fate 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다."
+        },
+        en: {
+          appName: "Fate",
+          supportShort: "Support",
+          supportPage: "Support",
+          privacyPolicy: "Privacy Policy",
+          contactDeveloper: "Contact Developer",
+          asideIntro: "All your personal fortune readings in one app",
+          asideLine1: "From saju to fandom",
+          asideLine2: "check your daily flow",
+          asideLine3: "",
+          brandMark: "with Fate",
+          asideNoteTitle: "Official page for App Store Marketing URL",
+          asideNoteBody: "Preview saju, tarot, palm, compatibility, zodiac, I Ching, past-life, fandom, and home widget flows from the current store screenshots.",
+          eyebrow: "All-in-one fortune folio",
+          heroTitle: "All your fortune readings in one place.",
+          heroLead: "Fate is a local-first fortune app for saju, tarot, palm reading, compatibility, zodiac, I Ching, past life, fandom, and daily fortune.",
+          proofLabel: "Daily fortune",
+          proofText: "Check today’s flow and revisit the readings that matter.",
+          quickScreenLabel: "Screens",
+          quickScreen: "App Preview",
+          quickModeLabel: "Readings",
+          quickMode: "Main Modes",
+          quickInfoLabel: "Info",
+          quickInfo: "Policy/Support",
+          screensTitle: "App Preview",
+          screensMeta: "Current store screens",
+          homeShotTitle: "Home and fortune hub",
+          homeShotText: "Daily fortune and key reading modes in one screen",
+          storeShotTitle: "Store screen preview",
+          storeShotText: "Fandom, daily fortune, I Ching, compatibility, past life, and widgets",
+          languageNote: "The app and this page support Korean, English, Japanese, Chinese, Spanish, French, German, and Portuguese.",
+          modesTitle: "Main Readings",
+          mode1Title: "Saju and daily fortune",
+          mode1Text: "Check daily flow and rhythm scores based on a birth profile.",
+          mode2Title: "Palm and zodiac",
+          mode2Text: "Choose readings such as palm, zodiac, and I Ching for each situation.",
+          mode3Title: "Compatibility",
+          mode3Text: "Compare two profiles and review key relationship points.",
+          mode4Title: "Fandom and past life",
+          mode4Text: "Explore fandom condition, attendance, and playful past-life readings.",
+          privacyTitle: "Designed around your device.",
+          privacyText: "Profiles, reading history, and settings are stored primarily on your device. Photo-based features such as palm reading use photos only when you choose them.",
+          linksTitle: "Official Info",
+          footerText: "Fate public marketing page for App Store Marketing URL and support."
+        }
+      };
+
+      translations.ja = {
+        ...translations.en,
+        appName: "運命",
+        supportShort: "サポート",
+        supportPage: "サポート",
+        privacyPolicy: "プライバシーポリシー",
+        contactDeveloper: "開発者に連絡",
+        asideIntro: "自分のための占いを一つのアプリで",
+        asideLine1: "四柱推命から推し活まで",
+        asideLine2: "毎日の運勢を",
+        brandMark: "運命",
+        asideLine3: "で",
+        heroTitle: "自分のための運勢を一か所で。",
+        heroLead: "運命は四柱推命、タロット、手相、相性、星座、易、前世、推し活、今日の運勢を確認できるローカル優先の占いアプリです。",
+        proofLabel: "今日の運勢",
+        proofText: "毎日の流れを確認し、必要なリーディングをもう一度開けます。",
+        screensTitle: "アプリプレビュー",
+        homeShotTitle: "ホームと運勢ハブ",
+        storeShotTitle: "ストア画面プレビュー",
+        languageNote: "アプリとこのページは韓国語、英語、日本語、中国語、スペイン語、フランス語、ドイツ語、ポルトガル語に対応しています.",
+        modesTitle: "主なリーディング",
+        privacyTitle: "端末中心に設計されています。",
+        linksTitle: "公式案内"
+      };
+      translations.zh = {
+        ...translations.en,
+        appName: "命运",
+        supportShort: "支持",
+        supportPage: "支持页面",
+        privacyPolicy: "隐私政策",
+        contactDeveloper: "联系开发者",
+        asideIntro: "在一个应用中查看属于你的运势",
+        asideLine1: "从四柱到粉丝心情",
+        asideLine2: "每天的运势",
+        brandMark: "命运",
+        asideLine3: "",
+        heroTitle: "属于你的所有运势，都在一处。",
+        heroLead: "命运是一款本地优先的运势应用，支持四柱、塔罗、手相、合盘、星座、易经、前世、粉丝心情和今日运势。",
+        proofLabel: "今日运势",
+        proofText: "查看每天的节奏，并重新打开重要的解读。",
+        screensTitle: "应用预览",
+        homeShotTitle: "首页和运势中心",
+        storeShotTitle: "商店截图预览",
+        languageNote: "应用和本页面支持韩语、英语、日语、中文、西班牙语、法语、德语和葡萄牙语。",
+        modesTitle: "主要解读",
+        privacyTitle: "以设备为中心设计。",
+        linksTitle: "官方信息"
+      };
+      translations.es = {
+        ...translations.en,
+        appName: "Destino",
+        supportShort: "Soporte",
+        supportPage: "Soporte",
+        privacyPolicy: "Privacidad",
+        contactDeveloper: "Contactar",
+        asideIntro: "Tus lecturas de fortuna en una sola app",
+        asideLine1: "De saju a fandom",
+        asideLine2: "consulta tu flujo diario",
+        brandMark: "con Destino",
+        asideLine3: "",
+        heroTitle: "Todas tus lecturas en un solo lugar.",
+        heroLead: "Destino es una app local-first para saju, tarot, palma, compatibilidad, zodiaco, I Ching, vidas pasadas, fandom y fortuna diaria.",
+        proofLabel: "Fortuna diaria",
+        proofText: "Consulta el flujo del día y vuelve a abrir tus lecturas importantes.",
+        screensTitle: "Vista previa",
+        homeShotTitle: "Inicio y centro de fortuna",
+        storeShotTitle: "Pantallas de tienda",
+        languageNote: "La app y esta página admiten coreano, inglés, japonés, chino, español, francés, alemán y portugués.",
+        modesTitle: "Lecturas principales",
+        privacyTitle: "Diseñada alrededor de tu dispositivo.",
+        linksTitle: "Información oficial"
+      };
+      translations.fr = {
+        ...translations.en,
+        appName: "Destin",
+        supportShort: "Aide",
+        supportPage: "Aide",
+        privacyPolicy: "Confidentialité",
+        contactDeveloper: "Contacter",
+        asideIntro: "Vos lectures de destin dans une seule app",
+        asideLine1: "Du saju au fandom",
+        asideLine2: "suivez votre rythme quotidien",
+        brandMark: "avec Destin",
+        asideLine3: "",
+        heroTitle: "Toutes vos lectures au même endroit.",
+        heroLead: "Destin est une app locale pour le saju, le tarot, la chiromancie, la compatibilité, le zodiaque, le Yi Jing, les vies passées, le fandom et la fortune quotidienne.",
+        proofLabel: "Fortune du jour",
+        proofText: "Consultez le rythme du jour et retrouvez vos lectures importantes.",
+        screensTitle: "Aperçu de l’app",
+        homeShotTitle: "Accueil et hub de fortune",
+        storeShotTitle: "Aperçu des écrans",
+        languageNote: "L’app et cette page prennent en charge le coréen, l’anglais, le japonais, le chinois, l’espagnol, le français, l’allemand et le portugais.",
+        modesTitle: "Lectures principales",
+        privacyTitle: "Conçue autour de votre appareil.",
+        linksTitle: "Infos officielles"
+      };
+      translations.de = {
+        ...translations.en,
+        appName: "Schicksal",
+        supportShort: "Hilfe",
+        supportPage: "Hilfe",
+        privacyPolicy: "Datenschutz",
+        contactDeveloper: "Kontakt",
+        asideIntro: "Deine Deutungen in einer App",
+        asideLine1: "Von Saju bis Fandom",
+        asideLine2: "prüfe deinen Tagesfluss",
+        brandMark: "mit Schicksal",
+        asideLine3: "",
+        heroTitle: "Alle Deutungen an einem Ort.",
+        heroLead: "Schicksal ist eine lokale App für Saju, Tarot, Handlesen, Kompatibilität, Sternzeichen, I Ging, frühere Leben, Fandom und Tagesfortune.",
+        proofLabel: "Tagesfortune",
+        proofText: "Prüfe den Tagesfluss und öffne wichtige Deutungen erneut.",
+        screensTitle: "App-Vorschau",
+        homeShotTitle: "Home und Fortune-Hub",
+        storeShotTitle: "Store-Screens",
+        languageNote: "App und Seite unterstützen Koreanisch, Englisch, Japanisch, Chinesisch, Spanisch, Französisch, Deutsch und Portugiesisch.",
+        modesTitle: "Hauptdeutungen",
+        privacyTitle: "Für dein Gerät konzipiert.",
+        linksTitle: "Offizielle Infos"
+      };
+      translations.pt = {
+        ...translations.en,
+        appName: "Destino",
+        supportShort: "Suporte",
+        supportPage: "Suporte",
+        privacyPolicy: "Privacidade",
+        contactDeveloper: "Contato",
+        asideIntro: "Suas leituras em um só app",
+        asideLine1: "De saju a fandom",
+        asideLine2: "acompanhe seu fluxo diário",
+        brandMark: "com Destino",
+        asideLine3: "",
+        heroTitle: "Todas as leituras em um só lugar.",
+        heroLead: "Destino é um app local-first para saju, tarô, leitura da mão, compatibilidade, zodíaco, I Ching, vidas passadas, fandom e fortuna diária.",
+        proofLabel: "Fortuna diária",
+        proofText: "Veja o fluxo do dia e reabra leituras importantes.",
+        screensTitle: "Prévia do app",
+        homeShotTitle: "Início e central de fortuna",
+        storeShotTitle: "Telas da loja",
+        languageNote: "O app e esta página oferecem coreano, inglês, japonês, chinês, espanhol, francês, alemão e português.",
+        modesTitle: "Leituras principais",
+        privacyTitle: "Projetado em torno do seu dispositivo.",
+        linksTitle: "Informações oficiais"
+      };
+
+      const select = document.getElementById("languageSelect");
+      const buttons = [...document.querySelectorAll("[data-lang-button]")];
+
+      function applyLanguage(lang) {
+        const copy = translations[lang] || translations.ko;
+        document.documentElement.lang = lang;
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          const key = node.dataset.i18n;
+          if (copy[key]) {
+            node.textContent = copy[key];
+          }
+        });
+        if (select) {
+          select.value = lang;
+        }
+        buttons.forEach((button) => {
+          button.classList.toggle("active", button.dataset.langButton === lang);
+        });
+        localStorage.setItem("fateMarketingLanguage", lang);
+      }
+
+      const initialLanguage =
+        localStorage.getItem("fateMarketingLanguage") ||
+        (navigator.language || "ko").slice(0, 2);
+      applyLanguage(translations[initialLanguage] ? initialLanguage : "ko");
+
+      select?.addEventListener("change", (event) => {
+        applyLanguage(event.target.value);
+      });
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          applyLanguage(button.dataset.langButton);
+        });
+      });
+    </script>
   </body>
 </html>
