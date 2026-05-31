@@ -8,7 +8,7 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f7f4ee;
+        --bg: #f5f5f2;
         --paper: #ffffff;
         --paper-strong: #ffffff;
         --ink: #171614;
@@ -16,11 +16,11 @@
         --brown: #966630;
         --rose: #95515a;
         --green: #346f55;
-        --muted: #746a5f;
-        --line: #eee7dc;
-        --gold: #d7a64c;
-        --gold-soft: #fff4dc;
-        --shadow: 0 16px 44px rgba(54, 42, 28, 0.08);
+        --muted: #6f6b65;
+        --line: #e8e7e2;
+        --accent: #b79a62;
+        --accent-soft: #f3f0e8;
+        --shadow: 0 22px 54px rgba(27, 25, 21, 0.08);
       }
 
       * {
@@ -35,7 +35,8 @@
         margin: 0;
         min-height: 100vh;
         overflow-x: hidden;
-        background: var(--bg);
+        background:
+          linear-gradient(90deg, #f2f2ef 0, #fafaf8 42%, #f4f4f1 100%);
         color: var(--ink);
         font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
         word-break: keep-all;
@@ -141,7 +142,7 @@
       .mode-card,
       .notice-card,
       .link-card {
-        border: 1px solid rgba(216, 207, 193, 0.78);
+        border: 1px solid var(--line);
         background: var(--paper-strong);
         box-shadow: var(--shadow);
       }
@@ -176,8 +177,8 @@
         z-index: 1;
         min-height: 30px;
         padding: 0 11px;
-        background: var(--gold-soft);
-        color: #6d4215;
+        background: #f1f0eb;
+        color: #59534b;
         font-size: 0.82rem;
       }
 
@@ -236,8 +237,8 @@
         align-items: center;
         justify-content: center;
         border-radius: 18px;
-        background: var(--gold-soft);
-        border: 1px solid rgba(215, 166, 76, 0.18);
+        background: #f4f3ef;
+        border: 1px solid var(--line);
       }
 
       .icon-tile img {
@@ -338,9 +339,9 @@
       .badge {
         height: 34px;
         padding: 0 12px;
-        border: 1px solid rgba(151, 102, 48, 0.28);
-        background: var(--gold-soft);
-        color: #4b3215;
+        border: 1px solid #ded9cf;
+        background: #f2f1ed;
+        color: #4e4a43;
         font-size: 0.78rem;
         transform: translateY(1px);
       }
@@ -348,9 +349,9 @@
       .phone-shot {
         border: 1px solid var(--line);
         border-radius: 20px;
-        background: #fffaf2;
+        background: #fff;
         overflow: hidden;
-        box-shadow: 0 18px 48px rgba(54, 42, 28, 0.1);
+        box-shadow: 0 18px 48px rgba(27, 25, 21, 0.08);
       }
 
       .phone-shot img {
@@ -367,9 +368,9 @@
       .store-shot {
         border: 1px solid var(--line);
         border-radius: 20px;
-        background: #fffaf2;
+        background: #fff;
         overflow: hidden;
-        box-shadow: 0 18px 48px rgba(54, 42, 28, 0.08);
+        box-shadow: 0 18px 48px rgba(27, 25, 21, 0.07);
       }
 
       .store-shot img {
@@ -470,8 +471,8 @@
 
       .language-pills button.active {
         border-color: rgba(151, 102, 48, 0.26);
-        background: var(--gold-soft);
-        color: #4b3215;
+        background: #171614;
+        color: #fff;
       }
 
       .notice-card h2 {
@@ -567,10 +568,10 @@
         }
 
         .aside h2 mark {
-          background: linear-gradient(var(--gold-soft), var(--gold-soft));
+          background: linear-gradient(var(--accent-soft), var(--accent-soft));
           background-repeat: no-repeat;
-          background-size: 100% 48%;
-          background-position: 0 88%;
+          background-size: 100% 38%;
+          background-position: 0 86%;
           color: inherit;
         }
 
@@ -603,10 +604,11 @@
           margin-top: 52px;
           padding: 22px 24px;
           border-radius: 18px;
-          background: var(--gold-soft);
-          color: #20170d;
+          background: #fff;
+          color: #171614;
           box-shadow: none;
-          border: 1px solid rgba(215, 166, 76, 0.24);
+          border: 1px solid var(--line);
+          border-left: 4px solid var(--accent);
         }
 
         .aside-note strong {
