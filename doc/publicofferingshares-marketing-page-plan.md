@@ -66,3 +66,12 @@ App Store Connect의 Marketing URL과 AdMob app-ads.txt 검증에 사용할 공�
 [Store/Legal Links]
   Privacy Policy | Support | Contact
 ```
+
+## Visual Direction Update
+
+- Product metaphor: 공모주 청약을 챙겨주는 "작은 비서의 데스크 보드"로 잡는다.
+- Structure: 첫 화면은 마케팅 문구보다 앱명, 일정표, 오늘의 체크리스트, 청약 진행 상태가 먼저 보이게 한다.
+- Information hierarchy: 큰 앱명과 한 줄 가치 제안을 최상단에 두고, 실제 기능은 캘린더/체크리스트/기록 흐름으로 나눈다.
+- Material direction: 노란 앱 아이콘 색상은 포인트로만 사용하고, 배경은 밝은 종이색과 짙은 잉크색을 섞어 금융 앱처럼 안정적으로 보이게 한다.
+- Reusable UI primitives: memo chip, calendar tile, status rail, assistant note, compact feature panel.
+- Risk: 투자 성과를 보장하는 표현은 피하고, 일정 관리와 기록 보조 도구임을 명확히 유지한다.
