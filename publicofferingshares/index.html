@@ -8,48 +8,74 @@
     <style>
       :root {
         color-scheme: light;
-        --paper: #fffdf7;
-        --ink: #18212f;
-        --muted: #667085;
-        --line: #e8ddc2;
-        --accent: #f3c533;
-        --accent-deep: #9b6f00;
-        --teal-soft: #dff4ed;
-        --red-soft: #ffe4df;
-        --blue-soft: #e7f0ff;
-        --shadow: 0 24px 60px rgba(40, 33, 18, 0.14);
-        --soft-shadow: 0 12px 30px rgba(40, 33, 18, 0.08);
+        --bg: #f4f7fe;
+        --surface: #ffffff;
+        --surface-soft: #f8fafd;
+        --ink: #1f2024;
+        --muted: #818c9a;
+        --line: #eaeef7;
+        --yellow: #fff854;
+        --yellow-deep: #f0c526;
+        --blue: #669aff;
+        --blue-soft: #eaf2ff;
+        --green-soft: #dff4ed;
+        --red-soft: #ffe2e2;
+        --orange-soft: #ffe8d6;
+        --shadow: 0 8px 24px rgba(31, 32, 36, 0.08);
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        font-size: 16px;
+      }
+
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        overflow-x: hidden;
         color: var(--ink);
-        background:
-          linear-gradient(180deg, #fbf8ef 0%, #f6f1e4 58%, #eef6f3 100%);
+        background: var(--bg);
+        font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        word-break: keep-all;
       }
 
       a {
         color: inherit;
+        text-decoration: none;
       }
 
-      .page {
-        max-width: 1180px;
+      .shell {
+        min-height: 100vh;
+      }
+
+      .aside {
+        display: none;
+      }
+
+      .mobile-page {
+        width: 100%;
+        min-width: 320px;
+        max-width: 480px;
         margin: 0 auto;
-        padding: 22px 20px 70px;
+        background: var(--surface-soft);
+        overflow: hidden;
       }
 
-      .nav {
+      .mobile-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        padding: 10px 0 18px;
+        min-height: 58px;
+        padding: 10px 24px;
+        background: rgba(248, 250, 253, 0.92);
+        border-bottom: 1px solid rgba(234, 238, 247, 0.8);
+        backdrop-filter: blur(12px);
       }
 
       .brand {
@@ -60,570 +86,602 @@
       }
 
       .brand img {
-        width: 42px;
-        height: 42px;
-        border-radius: 13px;
-        box-shadow: 0 10px 22px rgba(31, 41, 51, 0.14);
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        box-shadow: 0 8px 18px rgba(31, 32, 36, 0.12);
       }
 
-      .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        color: var(--muted);
-        font-size: 0.92rem;
-        font-weight: 700;
-      }
-
-      .nav-links a {
-        min-height: 38px;
+      .header-link {
+        min-height: 36px;
         display: inline-flex;
         align-items: center;
         padding: 0 12px;
-        border: 1px solid rgba(232, 221, 194, 0.75);
         border-radius: 999px;
-        background: rgba(255, 253, 247, 0.72);
-        text-decoration: none;
+        background: var(--yellow);
+        font-size: 0.82rem;
+        font-weight: 900;
       }
 
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 0.94fr) minmax(360px, 1.06fr);
-        gap: 34px;
-        align-items: center;
-        min-height: 640px;
+      .content {
+        padding: 24px 24px 76px;
+      }
+
+      .hero-card {
+        position: relative;
+        padding: 28px 22px 22px;
+        border-radius: 22px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        right: -42px;
+        top: -42px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: var(--yellow);
+        opacity: 0.9;
       }
 
       .hero-copy {
-        padding: 40px 0;
+        position: relative;
+        z-index: 1;
       }
 
       .eyebrow {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 9px 14px;
+        gap: 6px;
+        min-height: 28px;
+        padding: 0 10px;
         border-radius: 999px;
-        background: #fff1b6;
-        border: 1px solid #e7ce70;
-        color: var(--accent-deep);
-        font-size: 0.92rem;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 0.82rem;
         font-weight: 900;
       }
 
       h1 {
-        margin: 22px 0 18px;
-        max-width: 680px;
-        font-size: 5.3rem;
-        line-height: 1.02;
+        margin: 16px 0 10px;
+        font-size: 2rem;
+        line-height: 1.22;
         letter-spacing: 0;
       }
 
       .lead {
-        max-width: 650px;
+        max-width: 320px;
         margin: 0;
-        color: #3c4858;
-        font-size: 1.2rem;
-        line-height: 1.7;
-        font-weight: 700;
-      }
-
-      .hero-points {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 24px;
-        max-width: 620px;
-      }
-
-      .hero-point {
-        min-height: 86px;
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        background: rgba(255, 253, 247, 0.74);
-        box-shadow: var(--soft-shadow);
-      }
-
-      .hero-point span {
-        display: block;
         color: var(--muted);
-        font-size: 0.76rem;
-        font-weight: 900;
+        font-size: 0.95rem;
+        font-weight: 700;
+        line-height: 1.65;
       }
 
-      .hero-point strong {
+      .hero-visual {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 96px;
+        gap: 12px;
+        align-items: end;
+        margin-top: 24px;
+      }
+
+      .today-card {
+        padding: 16px;
+        border-radius: 18px;
+        background: #1f2024;
+        color: #fff;
+      }
+
+      .today-card span {
         display: block;
-        margin-top: 6px;
-        font-size: 1.02rem;
+        color: #bcc3d3;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .today-card strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 1.25rem;
         line-height: 1.25;
       }
 
-      .actions {
+      .app-icon-card {
+        min-height: 120px;
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 26px;
-      }
-
-      .button {
-        display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 48px;
-        padding: 13px 20px;
-        border-radius: 999px;
-        text-decoration: none;
-        font-weight: 900;
+        border-radius: 22px;
+        background: var(--yellow);
       }
 
-      .button-primary {
-        background: #111827;
-        color: white;
-        box-shadow: 0 16px 30px rgba(17, 24, 39, 0.22);
+      .app-icon-card img {
+        width: 70px;
+        height: 70px;
+        border-radius: 20px;
+        box-shadow: 0 12px 24px rgba(31, 32, 36, 0.18);
       }
 
-      .button-secondary {
-        border: 1px solid var(--line);
-        background: rgba(255, 253, 246, 0.82);
-        color: var(--ink);
+      .quick-links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 14px;
       }
 
-      .desk-board {
-        position: relative;
-        padding: 18px;
-        border-radius: 34px;
-        background: #17212f;
+      .quick-link {
+        min-height: 76px;
+        padding: 13px 10px;
+        border-radius: 16px;
+        background: var(--surface);
         box-shadow: var(--shadow);
       }
 
-      .desk-board::before {
-        content: "";
-        position: absolute;
-        inset: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.09);
-        border-radius: 26px;
-        pointer-events: none;
-      }
-
-      .app-board {
-        position: relative;
-        min-height: 560px;
-        padding: 20px;
-        border-radius: 26px;
-        background:
-          linear-gradient(180deg, #fffaf0 0%, #f7f3e6 100%);
-        overflow: hidden;
-      }
-
-      .screen-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-      }
-
-      .screen-header img {
-        width: 54px;
-        height: 54px;
-        border-radius: 17px;
-      }
-
-      .screen-header strong {
-        display: block;
-        font-size: 1.12rem;
-      }
-
-      .screen-header span {
+      .quick-link span {
         display: block;
         color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 700;
+        font-size: 0.72rem;
+        font-weight: 800;
       }
 
-      .calendar-card {
-        padding: 16px;
+      .quick-link strong {
+        display: block;
+        margin-top: 7px;
+        font-size: 0.96rem;
+        line-height: 1.25;
+      }
+
+      .section {
+        margin-top: 34px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 1.55rem;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      .section-title span {
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .calendar-panel {
+        padding: 18px;
         border-radius: 20px;
-        background: white;
-        border: 1px solid #eee2bd;
-        box-shadow: 0 14px 28px rgba(61, 51, 24, 0.08);
+        background: var(--surface);
+        box-shadow: var(--shadow);
       }
 
-      .month {
+      .calendar-head {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         font-weight: 900;
       }
 
-      .week {
+      .calendar-head small {
+        color: var(--blue);
+        font-size: 0.82rem;
+        font-weight: 900;
+      }
+
+      .calendar-grid {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 8px;
       }
 
       .day {
-        min-height: 60px;
+        min-height: 64px;
         padding: 7px;
-        border-radius: 13px;
-        background: #f8fafc;
-        border: 1px solid #edf1f5;
+        border-radius: 14px;
+        background: var(--surface-soft);
+        color: #454b55;
         font-size: 0.78rem;
         font-weight: 900;
       }
 
       .pill {
         display: block;
-        margin-top: 6px;
-        padding: 4px 6px;
+        margin-top: 7px;
+        padding: 5px 6px;
         border-radius: 999px;
         font-size: 0.68rem;
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
-      .pill-sub { background: var(--red-soft); color: #9f2f24; }
-      .pill-list { background: var(--teal-soft); color: #0f665d; }
-      .pill-refund { background: var(--blue-soft); color: #1d5aa6; }
+      .pill-sub {
+        background: var(--red-soft);
+        color: #c73535;
+      }
 
-      .assistant-note {
+      .pill-list {
+        background: var(--green-soft);
+        color: #137369;
+      }
+
+      .pill-refund {
+        background: var(--blue-soft);
+        color: #386fc8;
+      }
+
+      .flow-list {
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 12px;
-        align-items: center;
-        margin-top: 12px;
-        padding: 14px;
-        border-radius: 20px;
-        background: #16202e;
-        color: white;
-      }
-
-      .assistant-note span {
-        display: block;
-        color: #b9c5d4;
-        font-size: 0.78rem;
-        font-weight: 900;
-      }
-
-      .assistant-note strong {
-        display: block;
-        margin-top: 4px;
-        line-height: 1.35;
-      }
-
-      .assistant-note em {
-        width: 48px;
-        height: 48px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 16px;
-        background: var(--accent);
-        color: #111827;
-        font-style: normal;
-        font-weight: 900;
-      }
-
-      .status-rail {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 10px;
-        margin-top: 12px;
       }
 
-      .status-card {
-        padding: 12px;
-        border-radius: 16px;
-        background: #fffdf7;
-        border: 1px solid #eadfbd;
-      }
-
-      .status-card span {
-        display: block;
-        color: var(--muted);
-        font-size: 0.74rem;
-        font-weight: 800;
-      }
-
-      .status-card strong {
-        display: block;
-        margin-top: 4px;
-        font-size: 1.05rem;
-      }
-
-      .flow {
+      .flow-item {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: 52px 1fr;
         gap: 14px;
-        margin-top: 32px;
+        align-items: center;
+        min-height: 88px;
+        padding: 14px;
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
       }
 
-      .flow-card {
-        min-height: 158px;
-        padding: 20px;
-        border-radius: 24px;
-        background: var(--paper);
-        border: 1px solid var(--line);
-        box-shadow: var(--soft-shadow);
-      }
-
-      .flow-card span {
-        display: inline-flex;
-        min-width: 34px;
-        height: 34px;
+      .flow-icon {
+        width: 52px;
+        height: 52px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 12px;
-        background: var(--ink);
-        color: white;
+        border-radius: 18px;
+        background: var(--surface-soft);
         font-weight: 900;
       }
 
-      .flow-card h3 {
-        margin: 14px 0 8px;
-        font-size: 1.12rem;
+      .flow-item:nth-child(1) .flow-icon {
+        background: var(--red-soft);
       }
 
-      .flow-card p {
+      .flow-item:nth-child(2) .flow-icon {
+        background: var(--blue-soft);
+      }
+
+      .flow-item:nth-child(3) .flow-icon {
+        background: var(--orange-soft);
+      }
+
+      .flow-item h3 {
+        margin: 0 0 5px;
+        font-size: 1.03rem;
+      }
+
+      .flow-item p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.55;
+        font-size: 0.9rem;
         font-weight: 700;
-      }
-
-      .section {
-        padding: 54px 0 0;
-      }
-
-      .section h2 {
-        margin: 0 0 12px;
-        font-size: 2.65rem;
-        line-height: 1.15;
-      }
-
-      .section-lead {
-        max-width: 700px;
-        margin: 0;
-        color: var(--muted);
-        font-weight: 700;
-        line-height: 1.7;
+        line-height: 1.45;
       }
 
       .feature-grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 24px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
       }
 
-      .feature {
-        min-height: 188px;
-        padding: 20px;
-        border-radius: 24px;
-        background: var(--paper);
-        border: 1px solid var(--line);
-        box-shadow: var(--soft-shadow);
+      .feature-card {
+        min-height: 148px;
+        position: relative;
+        padding: 16px;
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        overflow: hidden;
       }
 
-      .feature .mark {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+      .feature-card::after {
+        content: "";
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
         width: 34px;
         height: 34px;
-        border-radius: 13px;
-        background: var(--accent);
-        font-weight: 900;
+        border-radius: 12px;
+        background: var(--yellow);
       }
 
-      .feature h3 {
-        margin: 14px 0 8px;
-        font-size: 1.05rem;
+      .feature-card h3 {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 8px;
+        font-size: 1.04rem;
+        line-height: 1.35;
       }
 
-      .feature p {
+      .feature-card p {
+        position: relative;
+        z-index: 1;
         margin: 0;
         color: var(--muted);
-        font-size: 0.95rem;
-        line-height: 1.55;
+        font-size: 0.88rem;
         font-weight: 700;
-      }
-
-      .notice {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.6fr);
-        gap: 16px;
-        align-items: stretch;
-        margin-top: 4px;
+        line-height: 1.5;
       }
 
       .notice-card {
-        padding: 26px;
-        border-radius: 26px;
-        background: #102726;
-        color: white;
+        padding: 22px;
+        border-radius: 20px;
+        background: #1f2024;
+        color: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .notice-card h2 {
+        margin: 0 0 10px;
+        font-size: 1.45rem;
+        line-height: 1.28;
       }
 
       .notice-card p {
         margin: 0;
-        color: #d9f0ed;
-        line-height: 1.7;
+        color: #d8dee8;
         font-weight: 700;
+        line-height: 1.65;
       }
 
-      .links-card {
-        padding: 22px;
-        border-radius: 26px;
-        background: var(--paper);
-        border: 1px solid var(--line);
+      .link-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
       }
 
-      .links-card a {
-        display: block;
-        padding: 12px 0;
+      .link-list a {
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border-radius: 16px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
         font-weight: 900;
-        text-decoration: none;
-        border-bottom: 1px solid #eee4c8;
       }
 
-      .links-card a:last-child {
-        border-bottom: 0;
+      .link-list a::after {
+        content: ">";
+        color: var(--muted);
       }
 
       footer {
-        margin-top: 44px;
+        margin-top: 34px;
         color: var(--muted);
-        font-size: 0.92rem;
+        font-size: 0.78rem;
         font-weight: 700;
+        line-height: 1.5;
       }
 
-      @media (max-width: 860px) {
-        .hero,
-        .notice,
-        .flow {
-          grid-template-columns: 1fr;
+      @media (min-width: 960px) {
+        .shell {
+          display: grid;
+          grid-template-columns: minmax(360px, 1fr) 480px minmax(40px, 1fr);
+          column-gap: 44px;
+          align-items: stretch;
         }
 
-        h1 {
-          font-size: 3.6rem;
-        }
-
-        .section h2 {
-          font-size: 2.2rem;
-        }
-
-        .feature-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .desk-board {
-          padding: 14px;
-        }
-      }
-
-      @media (max-width: 560px) {
-        .page {
-          padding: 18px 14px 54px;
-        }
-
-        .nav {
-          align-items: flex-start;
+        .aside {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          display: flex;
           flex-direction: column;
+          justify-content: center;
+          padding: 56px 0 56px max(48px, calc((100vw - 1180px) / 2));
         }
 
-        .hero {
-          min-height: auto;
-          gap: 18px;
+        .aside-logo {
+          width: 72px;
+          height: 72px;
+          border-radius: 22px;
+          box-shadow: 0 12px 28px rgba(31, 32, 36, 0.13);
         }
 
-        .hero-copy {
-          padding: 18px 0 6px;
+        .aside-intro {
+          margin: 44px 0 16px;
+          color: #777;
+          font-size: 1.35rem;
+          font-weight: 700;
         }
 
-        h1 {
-          font-size: 2.5rem;
+        .aside h2 {
+          max-width: 520px;
+          margin: 0;
+          font-size: 3.15rem;
+          line-height: 1.18;
+          letter-spacing: 0;
         }
 
-        .lead {
-          font-size: 1.04rem;
+        .aside h2 mark {
+          background: linear-gradient(var(--yellow), var(--yellow));
+          background-repeat: no-repeat;
+          background-size: 100% 46%;
+          background-position: 0 88%;
+          color: inherit;
         }
 
-        .section h2 {
-          font-size: 1.82rem;
+        .aside-actions {
+          display: flex;
+          gap: 10px;
+          margin-top: 34px;
         }
 
-        .hero-points,
-        .feature-grid,
-        .status-rail {
+        .aside-actions a {
+          min-height: 50px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 18px;
+          border-radius: 14px;
+          background: var(--surface);
+          box-shadow: var(--shadow);
+          color: #535353;
+          font-weight: 900;
+        }
+
+        .aside-actions a:first-child {
+          background: var(--yellow);
+          color: var(--ink);
+        }
+
+        .desktop-note {
+          max-width: 540px;
+          margin-top: 52px;
+          padding: 22px 24px;
+          border-radius: 18px;
+          background: var(--blue);
+          color: #fff;
+          box-shadow: var(--shadow);
+        }
+
+        .desktop-note strong {
+          display: block;
+          margin-bottom: 6px;
+          font-size: 1.1rem;
+        }
+
+        .desktop-note span {
+          color: rgba(255, 255, 255, 0.78);
+          font-size: 0.92rem;
+          font-weight: 700;
+          line-height: 1.5;
+        }
+
+        .mobile-page {
+          grid-column: 2;
+          min-height: 100vh;
+          margin: 0;
+          box-shadow: 0 0 0 1px rgba(234, 238, 247, 0.9);
+        }
+      }
+
+      @media (max-width: 390px) {
+        .content {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .mobile-header {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .hero-visual,
+        .quick-links,
+        .feature-grid {
           grid-template-columns: 1fr;
         }
 
-        .app-board {
-          min-height: 500px;
-          padding: 16px;
+        .app-icon-card {
+          min-height: 96px;
+        }
+
+        h1 {
+          font-size: 1.72rem;
         }
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <nav class="nav" aria-label="공모주비서 링크">
-        <div class="brand">
-          <img src="./assets/app-icon.png" alt="공모주비서 앱 아이콘">
-          <span>공모주비서</span>
-        </div>
-        <div class="nav-links">
+    <main class="shell">
+      <aside class="aside" aria-label="공모주비서 소개">
+        <img class="aside-logo" src="./assets/app-icon.png" alt="공모주비서 앱 아이콘">
+        <p class="aside-intro">공모주 청약을 챙기는 가장 가벼운 방법</p>
+        <h2>
+          청약 일정부터<br>
+          내 기록까지<br>
+          <mark>공모주비서</mark>에서
+        </h2>
+        <div class="aside-actions">
+          <a href="./support.html">지원 페이지</a>
           <a href="./private-policy.html">개인정보처리방침</a>
-          <a href="./support.html">지원</a>
-          <a href="mailto:qnqnqnckck@gmail.com">문의</a>
         </div>
-      </nav>
+        <div class="desktop-note">
+          <strong>App Store Marketing URL용 공식 소개 페이지</strong>
+          <span>공모주비서의 기능, 개인정보 안내, 개발자 지원 링크를 한 곳에서 확인할 수 있습니다.</span>
+        </div>
+      </aside>
 
-      <section class="hero">
-        <div class="hero-copy">
-          <span class="eyebrow">공모주 일정 관리 비서</span>
-          <h1>청약할 공모주만 빠르게 챙기세요.</h1>
-          <p class="lead">
-            공모주비서는 청약, 환불, 상장 일정을 캘린더로 정리하고 내 청약 기록과 손익 흐름을 기기 안에서 관리하는 로컬 중심 앱입니다.
-          </p>
-          <div class="hero-points" aria-label="공모주비서 핵심 요약">
-            <div class="hero-point">
+      <section class="mobile-page" aria-label="공모주비서 마케팅 페이지">
+        <header class="mobile-header">
+          <div class="brand">
+            <img src="./assets/app-icon.png" alt="공모주비서 앱 아이콘">
+            <span>공모주비서</span>
+          </div>
+          <a class="header-link" href="./support.html">지원</a>
+        </header>
+
+        <div class="content">
+          <section class="hero-card">
+            <div class="hero-copy">
+              <span class="eyebrow">IPO 일정 관리</span>
+              <h1>놓치기 쉬운 공모주 흐름을 한눈에.</h1>
+              <p class="lead">
+                청약, 환불, 상장 일정과 내 참여 기록을 기기 중심으로 정리하는 공모주 도우미 앱입니다.
+              </p>
+            </div>
+            <div class="hero-visual">
+              <div class="today-card">
+                <span>오늘의 비서 메모</span>
+                <strong>이번 주 청약 2건과 환불 1건을 먼저 확인하세요.</strong>
+              </div>
+              <div class="app-icon-card">
+                <img src="./assets/app-icon.png" alt="">
+              </div>
+            </div>
+          </section>
+
+          <nav class="quick-links" aria-label="핵심 기능 바로 보기">
+            <a class="quick-link" href="#calendar">
               <span>일정</span>
-              <strong>청약부터 상장까지</strong>
-            </div>
-            <div class="hero-point">
+              <strong>월간 캘린더</strong>
+            </a>
+            <a class="quick-link" href="#flow">
               <span>기록</span>
-              <strong>배정과 매도 메모</strong>
-            </div>
-            <div class="hero-point">
-              <span>알림</span>
-              <strong>D-day로 놓침 방지</strong>
-            </div>
-          </div>
-          <div class="actions">
-            <a class="button button-primary" href="./support.html">지원 페이지 보기</a>
-            <a class="button button-secondary" href="./private-policy.html">개인정보처리방침</a>
-          </div>
-        </div>
+              <strong>청약 흐름</strong>
+            </a>
+            <a class="quick-link" href="#links">
+              <span>안내</span>
+              <strong>정책/지원</strong>
+            </a>
+          </nav>
 
-        <div class="desk-board" aria-label="공모주비서 앱 화면 예시">
-          <div class="app-board">
-            <div class="screen-header">
-              <img src="./assets/app-icon.png" alt="">
-              <div>
-                <strong>오늘의 공모주 데스크</strong>
-                <span>일정, 기록, 알림을 한 화면에서</span>
-              </div>
+          <section id="calendar" class="section">
+            <div class="section-title">
+              <h2>이번 달 일정</h2>
+              <span>청약부터 상장까지</span>
             </div>
-
-            <div class="calendar-card">
-              <div class="month">
-                <span>2026.05</span>
-                <span>월-금 체크</span>
+            <div class="calendar-panel">
+              <div class="calendar-head">
+                <strong>2026.05</strong>
+                <small>월-금 보기</small>
               </div>
-              <div class="week">
+              <div class="calendar-grid">
                 <div class="day">월<span class="pill pill-sub">청약</span></div>
                 <div class="day">화<span class="pill pill-refund">환불</span></div>
                 <div class="day">수</div>
@@ -636,100 +694,89 @@
                 <div class="day">금</div>
               </div>
             </div>
+          </section>
 
-            <div class="assistant-note">
-              <div>
-                <span>비서 메모</span>
-                <strong>이번 주 청약 2건, 환불 1건을 먼저 확인하세요.</strong>
-              </div>
-              <em>D-2</em>
+          <section id="flow" class="section">
+            <div class="section-title">
+              <h2>사용 흐름</h2>
+              <span>작게, 빠르게</span>
             </div>
-
-            <div class="status-rail">
-              <div class="status-card">
-                <span>이번 주</span>
-                <strong>4건</strong>
-              </div>
-              <div class="status-card">
-                <span>기록</span>
-                <strong>로컬</strong>
-              </div>
-              <div class="status-card">
-                <span>알림</span>
-                <strong>D-day</strong>
-              </div>
+            <div class="flow-list">
+              <article class="flow-item">
+                <div class="flow-icon">1</div>
+                <div>
+                  <h3>일정을 먼저 훑고</h3>
+                  <p>청약, 환불, 상장 일정을 월간 캘린더로 확인합니다.</p>
+                </div>
+              </article>
+              <article class="flow-item">
+                <div class="flow-icon">2</div>
+                <div>
+                  <h3>참여 전 조건을 보고</h3>
+                  <p>공모가, 주관사, 경쟁률처럼 필요한 항목을 정리합니다.</p>
+                </div>
+              </article>
+              <article class="flow-item">
+                <div class="flow-icon">3</div>
+                <div>
+                  <h3>내 기록으로 남깁니다</h3>
+                  <p>배정 수량, 매도가, 손익을 저장해 다음 판단에 참고합니다.</p>
+                </div>
+              </article>
             </div>
-          </div>
+          </section>
+
+          <section class="section">
+            <div class="section-title">
+              <h2>주요 기능</h2>
+              <span>필요한 것만</span>
+            </div>
+            <div class="feature-grid">
+              <article class="feature-card">
+                <h3>월간 일정 캘린더</h3>
+                <p>청약, 환불, 상장, 수요예측 일정을 한 달 단위로 봅니다.</p>
+              </article>
+              <article class="feature-card">
+                <h3>청약 전 체크</h3>
+                <p>참여 전 확인해야 할 정보를 작게 모아 보여줍니다.</p>
+              </article>
+              <article class="feature-card">
+                <h3>포트폴리오 기록</h3>
+                <p>배정과 매도 기록, 손익 흐름을 기기 안에 저장합니다.</p>
+              </article>
+              <article class="feature-card">
+                <h3>알림과 공유</h3>
+                <p>중요 일정 알림과 월간 일정 이미지 저장을 지원합니다.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="notice-card">
+              <h2>로컬 중심으로 설계했습니다.</h2>
+              <p>
+                사용자의 청약 기록과 설정은 기기 중심으로 관리됩니다. 앱은 공개된 공모주 정보를 더 쉽게 확인하기 위한 도구이며, 투자 판단은 사용자가 직접 결정해야 합니다.
+              </p>
+            </div>
+          </section>
+
+          <section id="links" class="section">
+            <div class="section-title">
+              <h2>공식 안내</h2>
+              <span>Policy & Support</span>
+            </div>
+            <div class="link-list">
+              <a href="./private-policy.html">개인정보처리방침</a>
+              <a href="./support.html">지원 페이지</a>
+              <a href="mailto:qnqnqnckck@gmail.com">개발자에게 문의</a>
+            </div>
+          </section>
+
+          <footer>
+            <p>공모주비서 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다.</p>
+          </footer>
         </div>
       </section>
-
-      <section class="flow" aria-label="공모주비서 사용 흐름">
-        <article class="flow-card">
-          <span>1</span>
-          <h3>이번 달 일정을 훑고</h3>
-          <p>청약, 환불, 상장 일정을 월간 캘린더에서 먼저 확인합니다.</p>
-        </article>
-        <article class="flow-card">
-          <span>2</span>
-          <h3>참여 전 조건을 보고</h3>
-          <p>공모가, 주관사, 경쟁률처럼 청약 전 필요한 항목을 정리합니다.</p>
-        </article>
-        <article class="flow-card">
-          <span>3</span>
-          <h3>내 기록으로 남깁니다</h3>
-          <p>배정 수량, 매도가, 손익을 저장해 다음 청약 판단에 참고합니다.</p>
-        </article>
-      </section>
-
-      <section class="section">
-        <h2>공모주 확인에 필요한 기능만 선명하게.</h2>
-        <p class="section-lead">
-          매번 흩어진 일정과 기록을 다시 찾지 않도록, 청약 전 확인부터 참여 기록과 매도 후 손익까지 한 앱 안에서 이어집니다.
-        </p>
-
-        <div class="feature-grid">
-          <article class="feature">
-            <span class="mark">1</span>
-            <h3>월간 일정 캘린더</h3>
-            <p>청약, 환불, 상장, 수요예측 일정을 월 단위로 빠르게 훑어봅니다.</p>
-          </article>
-          <article class="feature">
-            <span class="mark">2</span>
-            <h3>청약 전 체크</h3>
-            <p>경쟁률, 공모가, 주관사 정보를 바탕으로 참여 전 확인할 내용을 정리합니다.</p>
-          </article>
-          <article class="feature">
-            <span class="mark">3</span>
-            <h3>포트폴리오 기록</h3>
-            <p>청약, 배정, 매도 기록을 남기고 누적 손익을 확인합니다.</p>
-          </article>
-          <article class="feature">
-            <span class="mark">4</span>
-            <h3>알림과 공유</h3>
-            <p>중요 일정 알림을 받고, 월간 일정 이미지를 저장하거나 공유합니다.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="notice">
-          <div class="notice-card">
-            <h2>로컬 중심으로 설계했습니다.</h2>
-            <p>
-              사용자의 청약 기록과 설정은 기기 중심으로 관리됩니다. 앱은 공모주 일정과 공개 데이터를 더 쉽게 확인하기 위한 도구이며, 투자 판단은 사용자가 직접 결정해야 합니다.
-            </p>
-          </div>
-          <div class="links-card">
-            <a href="./private-policy.html">개인정보처리방침</a>
-            <a href="./support.html">지원 페이지</a>
-            <a href="mailto:qnqnqnckck@gmail.com">개발자에게 문의</a>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <p>공모주비서 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다.</p>
-      </footer>
     </main>
   </body>
 </html>

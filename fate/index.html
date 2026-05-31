@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="운명/Fate - 사주, 타로, 궁합, 오늘 운세, 별자리, 손금과 관상 리딩을 기기 중심으로 저장하는 로컬 우선 운세 앱">
+    <title>운명 - 사주와 타로를 한 장의 운세 카드처럼</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg-a: #f4e8d8;
+        --bg-b: #fff7ea;
+        --bg-c: #e9d8c1;
+        --paper: #fffbf6;
+        --paper-soft: #f7ead8;
+        --ink: #1e1b18;
+        --night: #120f0d;
+        --night-soft: #1f2430;
+        --muted: #6f6359;
+        --line: #d8be9b;
+        --gold: #d8a846;
+        --gold-soft: #f1dfbd;
+        --saju: #e0ebf3;
+        --tarot: #f7e5d1;
+        --compat: #f2dedf;
+        --zodiac: #dfefe5;
+        --shadow: 0 16px 42px rgba(54, 42, 28, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, var(--bg-a), var(--bg-b) 48%, var(--bg-c));
+        color: var(--ink);
+        font-family: Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        word-break: keep-all;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .shell {
+        min-height: 100vh;
+      }
+
+      .aside {
+        display: none;
+      }
+
+      .mobile-page {
+        width: 100%;
+        min-width: 320px;
+        max-width: 480px;
+        margin: 0 auto;
+        background: rgba(255, 251, 246, 0.82);
+        overflow: hidden;
+      }
+
+      .mobile-header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 24px;
+        background: rgba(255, 251, 246, 0.88);
+        border-bottom: 1px solid rgba(216, 190, 155, 0.55);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+        border-radius: 13px;
+        box-shadow: 0 10px 22px rgba(54, 42, 28, 0.18);
+      }
+
+      .header-link {
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 13px;
+        border-radius: 999px;
+        background: var(--night);
+        color: #fff7ea;
+        font-size: 0.82rem;
+        font-weight: 900;
+      }
+
+      .content {
+        padding: 24px 24px 76px;
+      }
+
+      .hero-card {
+        position: relative;
+        padding: 28px 22px 22px;
+        border: 1px solid rgba(216, 190, 155, 0.72);
+        border-radius: 28px;
+        background:
+          linear-gradient(160deg, rgba(255, 251, 246, 0.96), rgba(247, 234, 216, 0.94)),
+          var(--paper);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        right: -50px;
+        top: -58px;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        background: var(--gold);
+        opacity: 0.28;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        width: 52px;
+        height: 52px;
+        border: 1px solid rgba(154, 95, 35, 0.28);
+        border-radius: 50%;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 0 11px;
+        border-radius: 999px;
+        background: var(--gold-soft);
+        color: #6d4215;
+        font-size: 0.82rem;
+        font-weight: 900;
+      }
+
+      h1 {
+        position: relative;
+        z-index: 1;
+        margin: 16px 0 10px;
+        font-size: 2.08rem;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        position: relative;
+        z-index: 1;
+        max-width: 330px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.96rem;
+        font-weight: 700;
+        line-height: 1.68;
+      }
+
+      .oracle-card {
+        position: relative;
+        z-index: 1;
+        margin-top: 24px;
+        padding: 16px;
+        border-radius: 22px;
+        background: var(--night);
+        color: #fff7ea;
+      }
+
+      .oracle-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .oracle-top img {
+        width: 68px;
+        height: 68px;
+        border-radius: 20px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+      }
+
+      .oracle-top span {
+        display: block;
+        color: #d7c2a5;
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .oracle-top strong {
+        display: block;
+        margin-top: 7px;
+        font-size: 1.24rem;
+        line-height: 1.26;
+      }
+
+      .reading-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .reading-chip {
+        min-height: 56px;
+        padding: 10px;
+        border-radius: 16px;
+        background: rgba(255, 247, 234, 0.1);
+        color: #fff7ea;
+        font-size: 0.84rem;
+        font-weight: 900;
+      }
+
+      .quick-links {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .quick-link {
+        min-height: 78px;
+        padding: 13px 11px;
+        border: 1px solid rgba(216, 190, 155, 0.62);
+        border-radius: 18px;
+        background: rgba(255, 251, 246, 0.9);
+        box-shadow: 0 10px 24px rgba(54, 42, 28, 0.08);
+      }
+
+      .quick-link span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+      }
+
+      .quick-link strong {
+        display: block;
+        margin-top: 7px;
+        font-size: 0.98rem;
+        line-height: 1.24;
+      }
+
+      .section {
+        margin-top: 34px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: 1.55rem;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      .section-title span {
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .mode-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .mode-card {
+        min-height: 150px;
+        position: relative;
+        padding: 16px;
+        border-radius: 20px;
+        background: var(--paper);
+        border: 1px solid rgba(216, 190, 155, 0.62);
+        box-shadow: 0 10px 24px rgba(54, 42, 28, 0.08);
+        overflow: hidden;
+      }
+
+      .mode-card::after {
+        content: "";
+        position: absolute;
+        right: 14px;
+        bottom: 14px;
+        width: 38px;
+        height: 38px;
+        border-radius: 15px;
+        background: var(--gold);
+        opacity: 0.9;
+      }
+
+      .mode-card:nth-child(1) {
+        background: var(--saju);
+      }
+
+      .mode-card:nth-child(2) {
+        background: var(--tarot);
+      }
+
+      .mode-card:nth-child(3) {
+        background: var(--compat);
+      }
+
+      .mode-card:nth-child(4) {
+        background: var(--zodiac);
+      }
+
+      .mode-card h3 {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 8px;
+        font-size: 1.08rem;
+      }
+
+      .mode-card p {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #51483f;
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      .flow-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .flow-item {
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 14px;
+        align-items: center;
+        min-height: 88px;
+        padding: 14px;
+        border-radius: 20px;
+        background: rgba(255, 251, 246, 0.92);
+        border: 1px solid rgba(216, 190, 155, 0.6);
+        box-shadow: 0 10px 24px rgba(54, 42, 28, 0.08);
+      }
+
+      .flow-icon {
+        width: 52px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        background: var(--night);
+        color: #fff7ea;
+        font-weight: 900;
+      }
+
+      .flow-item h3 {
+        margin: 0 0 5px;
+        font-size: 1.03rem;
+      }
+
+      .flow-item p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+
+      .notice-card {
+        padding: 22px;
+        border-radius: 22px;
+        background: var(--night);
+        color: #fff7ea;
+        box-shadow: var(--shadow);
+      }
+
+      .notice-card h2 {
+        margin: 0 0 10px;
+        font-size: 1.45rem;
+        line-height: 1.28;
+      }
+
+      .notice-card p {
+        margin: 0;
+        color: #e4d5bf;
+        font-weight: 700;
+        line-height: 1.65;
+      }
+
+      .link-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .link-list a {
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        border: 1px solid rgba(216, 190, 155, 0.62);
+        border-radius: 18px;
+        background: rgba(255, 251, 246, 0.92);
+        box-shadow: 0 10px 24px rgba(54, 42, 28, 0.08);
+        font-weight: 900;
+      }
+
+      .link-list a::after {
+        content: ">";
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 34px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      @media (min-width: 960px) {
+        .shell {
+          display: grid;
+          grid-template-columns: minmax(360px, 1fr) 480px minmax(40px, 1fr);
+          column-gap: 44px;
+          align-items: stretch;
+        }
+
+        .aside {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 56px 0 56px max(48px, calc((100vw - 1180px) / 2));
+        }
+
+        .aside-logo {
+          width: 74px;
+          height: 74px;
+          border-radius: 24px;
+          box-shadow: 0 14px 34px rgba(54, 42, 28, 0.18);
+        }
+
+        .aside-intro {
+          margin: 44px 0 16px;
+          color: var(--muted);
+          font-size: 1.35rem;
+          font-weight: 700;
+        }
+
+        .aside h2 {
+          max-width: 540px;
+          margin: 0;
+          font-size: 3.2rem;
+          line-height: 1.18;
+          letter-spacing: 0;
+        }
+
+        .aside h2 mark {
+          background: linear-gradient(var(--gold-soft), var(--gold-soft));
+          background-repeat: no-repeat;
+          background-size: 100% 46%;
+          background-position: 0 88%;
+          color: inherit;
+        }
+
+        .aside-actions {
+          display: flex;
+          gap: 10px;
+          margin-top: 34px;
+        }
+
+        .aside-actions a {
+          min-height: 50px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 18px;
+          border-radius: 16px;
+          background: var(--paper);
+          box-shadow: 0 10px 24px rgba(54, 42, 28, 0.09);
+          color: #51483f;
+          font-weight: 900;
+        }
+
+        .aside-actions a:first-child {
+          background: var(--night);
+          color: #fff7ea;
+        }
+
+        .desktop-note {
+          max-width: 540px;
+          margin-top: 52px;
+          padding: 22px 24px;
+          border-radius: 20px;
+          background: var(--gold);
+          color: var(--night);
+          box-shadow: var(--shadow);
+        }
+
+        .desktop-note strong {
+          display: block;
+          margin-bottom: 6px;
+          font-size: 1.1rem;
+        }
+
+        .desktop-note span {
+          color: rgba(18, 15, 13, 0.76);
+          font-size: 0.92rem;
+          font-weight: 800;
+          line-height: 1.5;
+        }
+
+        .mobile-page {
+          grid-column: 2;
+          min-height: 100vh;
+          margin: 0;
+          box-shadow: 0 0 0 1px rgba(216, 190, 155, 0.62);
+        }
+      }
+
+      @media (max-width: 390px) {
+        .content {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .mobile-header {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .quick-links,
+        .mode-grid,
+        .reading-strip {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 1.76rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="aside" aria-label="운명 앱 소개">
+        <img class="aside-logo" src="./assets/app-icon.png" alt="운명 앱 아이콘">
+        <p class="aside-intro">사주와 타로를 기록하는 로컬 운세 노트</p>
+        <h2>
+          오늘의 흐름부터<br>
+          깊은 리딩까지<br>
+          <mark>운명</mark>에서
+        </h2>
+        <div class="aside-actions">
+          <a href="./support.html">지원 페이지</a>
+          <a href="./private-policy.html">개인정보처리방침</a>
+        </div>
+        <div class="desktop-note">
+          <strong>App Store Marketing URL용 공식 소개 페이지</strong>
+          <span>운명/Fate의 리딩 기능, 로컬 중심 저장 방식, 지원 링크를 한 곳에서 확인할 수 있습니다.</span>
+        </div>
+      </aside>
+
+      <section class="mobile-page" aria-label="운명 마케팅 페이지">
+        <header class="mobile-header">
+          <div class="brand">
+            <img src="./assets/app-icon.png" alt="운명 앱 아이콘">
+            <span>운명</span>
+          </div>
+          <a class="header-link" href="./support.html">지원</a>
+        </header>
+
+        <div class="content">
+          <section class="hero-card">
+            <span class="eyebrow">Fate reading folio</span>
+            <h1>사주와 타로를 한 장의 운세 카드처럼.</h1>
+            <p class="lead">
+              운명은 사주, 타로, 궁합, 오늘 운세와 저장한 리딩을 기기 중심으로 관리하는 로컬 우선 운세 앱입니다.
+            </p>
+            <div class="oracle-card">
+              <div class="oracle-top">
+                <div>
+                  <span>오늘의 리딩</span>
+                  <strong>내 흐름을 가볍게 확인하고 기록하세요.</strong>
+                </div>
+                <img src="./assets/app-icon.png" alt="">
+              </div>
+              <div class="reading-strip">
+                <div class="reading-chip">사주</div>
+                <div class="reading-chip">타로</div>
+                <div class="reading-chip">궁합</div>
+              </div>
+            </div>
+          </section>
+
+          <nav class="quick-links" aria-label="핵심 섹션 바로 보기">
+            <a class="quick-link" href="#modes">
+              <span>리딩</span>
+              <strong>주요 모드</strong>
+            </a>
+            <a class="quick-link" href="#flow">
+              <span>기록</span>
+              <strong>저장 흐름</strong>
+            </a>
+            <a class="quick-link" href="#links">
+              <span>안내</span>
+              <strong>정책/지원</strong>
+            </a>
+          </nav>
+
+          <section id="modes" class="section">
+            <div class="section-title">
+              <h2>주요 리딩</h2>
+              <span>Local-first</span>
+            </div>
+            <div class="mode-grid">
+              <article class="mode-card">
+                <h3>사주와 오늘 운세</h3>
+                <p>출생 프로필을 바탕으로 오늘의 흐름과 기본 사주 리딩을 확인합니다.</p>
+              </article>
+              <article class="mode-card">
+                <h3>타로 리딩</h3>
+                <p>질문에 맞는 카드 흐름을 뽑고 결과를 저장하거나 공유합니다.</p>
+              </article>
+              <article class="mode-card">
+                <h3>궁합과 관계</h3>
+                <p>두 프로필의 관계 흐름을 비교하고 중요한 포인트를 정리합니다.</p>
+              </article>
+              <article class="mode-card">
+                <h3>별자리와 확장 리딩</h3>
+                <p>별자리, 토정비결, 주역, 손금, 관상 등 여러 리딩을 탐색합니다.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="flow" class="section">
+            <div class="section-title">
+              <h2>사용 흐름</h2>
+              <span>탐색하고 저장</span>
+            </div>
+            <div class="flow-list">
+              <article class="flow-item">
+                <div class="flow-icon">1</div>
+                <div>
+                  <h3>프로필을 만들고</h3>
+                  <p>출생 정보와 선호 설정을 기기에 저장해 리딩 기준을 준비합니다.</p>
+                </div>
+              </article>
+              <article class="flow-item">
+                <div class="flow-icon">2</div>
+                <div>
+                  <h3>오늘의 리딩을 보고</h3>
+                  <p>사주, 타로, 궁합, 별자리 중 필요한 리딩을 선택해 확인합니다.</p>
+                </div>
+              </article>
+              <article class="flow-item">
+                <div class="flow-icon">3</div>
+                <div>
+                  <h3>결과를 남깁니다</h3>
+                  <p>마음에 남는 해석은 저장하고, 필요할 때 이미지나 텍스트로 공유합니다.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="notice-card">
+              <h2>기기 중심으로 설계했습니다.</h2>
+              <p>
+                프로필, 리딩 기록, 앱 설정은 기본적으로 사용자의 기기 안에 저장됩니다. 손금과 관상 기능의 사진은 사용자가 선택한 경우에만 앱 기능에 사용됩니다.
+              </p>
+            </div>
+          </section>
+
+          <section id="links" class="section">
+            <div class="section-title">
+              <h2>공식 안내</h2>
+              <span>Policy & Support</span>
+            </div>
+            <div class="link-list">
+              <a href="./private-policy.html">개인정보처리방침</a>
+              <a href="./support.html">지원 페이지</a>
+              <a href="mailto:qnqnqnckck@gmail.com">개발자에게 문의</a>
+            </div>
+          </section>
+
+          <footer>
+            <p>운명/Fate 공개 마케팅 페이지. App Store Marketing URL 및 앱 지원 안내용 정적 페이지입니다.</p>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
