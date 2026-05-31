@@ -8,19 +8,19 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f3ede3;
-        --paper: #fffaf2;
-        --paper-strong: #fffdf8;
+        --bg: #f7f4ee;
+        --paper: #ffffff;
+        --paper-strong: #ffffff;
         --ink: #171614;
         --navy: #1e2d5a;
         --brown: #966630;
         --rose: #95515a;
         --green: #346f55;
-        --muted: #756d64;
-        --line: #d8cfc1;
+        --muted: #746a5f;
+        --line: #eee7dc;
         --gold: #d7a64c;
-        --gold-soft: #f3dfb9;
-        --shadow: 0 0 8px rgba(54, 42, 28, 0.1);
+        --gold-soft: #fff4dc;
+        --shadow: 0 16px 44px rgba(54, 42, 28, 0.08);
       }
 
       * {
@@ -74,8 +74,8 @@
         align-items: center;
         justify-content: space-between;
         padding: 10px 24px;
-        background: rgba(255, 250, 242, 0.94);
-        border-bottom: 1px solid rgba(216, 207, 193, 0.72);
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid var(--line);
         backdrop-filter: blur(12px);
       }
 
@@ -102,7 +102,7 @@
       .language-select {
         height: 34px;
         max-width: 104px;
-        border: 1px solid rgba(216, 207, 193, 0.9);
+        border: 1px solid var(--line);
         border-radius: 999px;
         background: var(--paper-strong);
         color: var(--ink);
@@ -119,14 +119,21 @@
         justify-content: center;
         padding: 0 13px;
         border-radius: 999px;
-        background: var(--navy);
+        background: #171614;
         color: #fff;
         font-size: 0.82rem;
         font-weight: 900;
       }
 
+      .store-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
       .content {
-        padding: 24px 24px 70px;
+        padding: 28px 24px 76px;
       }
 
       .hero-card,
@@ -141,21 +148,16 @@
 
       .hero-card {
         position: relative;
-        padding: 28px 22px 22px;
-        border-radius: 28px;
+        padding: 8px 0 16px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
         overflow: hidden;
       }
 
       .hero-card::after {
-        content: "";
-        position: absolute;
-        right: -48px;
-        top: -48px;
-        width: 152px;
-        height: 152px;
-        border-radius: 50%;
-        background: var(--gold);
-        opacity: 0.28;
+        content: none;
       }
 
       .eyebrow,
@@ -183,7 +185,7 @@
         position: relative;
         z-index: 1;
         margin: 16px 0 10px;
-        font-size: 2.05rem;
+        font-size: 2.16rem;
         line-height: 1.22;
         letter-spacing: 0;
       }
@@ -211,7 +213,7 @@
       .proof-note {
         padding: 16px;
         border-radius: 18px;
-        background: var(--navy);
+        background: #171614;
         color: #fff;
       }
 
@@ -235,6 +237,7 @@
         justify-content: center;
         border-radius: 18px;
         background: var(--gold-soft);
+        border: 1px solid rgba(215, 166, 76, 0.18);
       }
 
       .icon-tile img {
@@ -253,10 +256,10 @@
       .quick-tile {
         min-height: 76px;
         padding: 13px 11px;
-        border: 1px solid rgba(216, 207, 193, 0.78);
-        border-radius: 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
         background: var(--paper-strong);
-        box-shadow: var(--shadow);
+        box-shadow: none;
       }
 
       .quick-tile span {
@@ -274,7 +277,7 @@
       }
 
       .section {
-        margin-top: 34px;
+        margin-top: 42px;
       }
 
       .section-title {
@@ -300,13 +303,15 @@
       }
 
       .screen-card {
-        padding: 18px;
-        border-radius: 28px;
-        background: #f8f2e8;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
       }
 
       .screen-card + .screen-card {
-        margin-top: 14px;
+        margin-top: 30px;
       }
 
       .screen-head {
@@ -341,10 +346,11 @@
       }
 
       .phone-shot {
-        border: 1px solid rgba(216, 207, 193, 0.82);
-        border-radius: 28px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
         background: #fffaf2;
         overflow: hidden;
+        box-shadow: 0 18px 48px rgba(54, 42, 28, 0.1);
       }
 
       .phone-shot img {
@@ -354,15 +360,16 @@
 
       .store-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 18px;
       }
 
       .store-shot {
-        border: 1px solid rgba(216, 207, 193, 0.82);
-        border-radius: 22px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
         background: #fffaf2;
         overflow: hidden;
+        box-shadow: 0 18px 48px rgba(54, 42, 28, 0.08);
       }
 
       .store-shot img {
@@ -378,8 +385,9 @@
 
       .mode-card {
         min-height: 142px;
-        padding: 16px;
-        border-radius: 20px;
+        padding: 17px;
+        border-radius: 16px;
+        box-shadow: none;
       }
 
       .mode-card mark {
@@ -389,7 +397,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: var(--navy);
+        background: #171614;
         color: #fff;
         font-weight: 900;
       }
@@ -428,10 +436,10 @@
 
       .language-card {
         padding: 18px;
-        border-radius: 22px;
-        border: 1px solid rgba(216, 207, 193, 0.78);
+        border-radius: 18px;
+        border: 1px solid var(--line);
         background: var(--paper-strong);
-        box-shadow: var(--shadow);
+        box-shadow: none;
       }
 
       .language-card p {
@@ -450,7 +458,7 @@
 
       .language-pills button {
         min-height: 34px;
-        border: 1px solid rgba(216, 207, 193, 0.9);
+        border: 1px solid var(--line);
         border-radius: 999px;
         background: #fff;
         color: var(--ink);
@@ -461,7 +469,7 @@
       }
 
       .language-pills button.active {
-        border-color: rgba(151, 102, 48, 0.32);
+        border-color: rgba(151, 102, 48, 0.26);
         background: var(--gold-soft);
         color: #4b3215;
       }
@@ -482,7 +490,8 @@
       .link-card {
         margin-top: 12px;
         padding: 4px 16px;
-        border-radius: 20px;
+        border-radius: 18px;
+        box-shadow: none;
       }
 
       .link-card a {
@@ -490,7 +499,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgba(216, 207, 193, 0.72);
+        border-bottom: 1px solid var(--line);
         font-weight: 900;
       }
 
@@ -501,6 +510,10 @@
       .link-card a::after {
         content: ">";
         color: var(--muted);
+      }
+
+      .link-card a.store-link-row {
+        color: #111;
       }
 
       footer {
@@ -514,8 +527,8 @@
       @media (min-width: 960px) {
         .layout {
           display: grid;
-          grid-template-columns: minmax(420px, 540px) 480px 220px;
-          column-gap: 40px;
+          grid-template-columns: minmax(440px, 620px) 520px 220px;
+          column-gap: 46px;
           align-items: stretch;
           justify-content: center;
         }
@@ -548,7 +561,7 @@
         .aside h2 {
           max-width: 560px;
           margin: 0;
-          font-size: 3.3rem;
+          font-size: 3.55rem;
           line-height: 1.16;
           letter-spacing: 0;
         }
@@ -575,13 +588,13 @@
           padding: 0 18px;
           border-radius: 16px;
           background: var(--paper-strong);
-          box-shadow: var(--shadow);
+          box-shadow: none;
           color: #51483f;
           font-weight: 900;
         }
 
         .aside-actions a:first-child {
-          background: var(--navy);
+          background: #171614;
           color: #fff;
         }
 
@@ -589,10 +602,11 @@
           max-width: 540px;
           margin-top: 52px;
           padding: 22px 24px;
-          border-radius: 20px;
-          background: var(--gold);
+          border-radius: 18px;
+          background: var(--gold-soft);
           color: #20170d;
-          box-shadow: var(--shadow);
+          box-shadow: none;
+          border: 1px solid rgba(215, 166, 76, 0.24);
         }
 
         .aside-note strong {
@@ -611,14 +625,14 @@
         .qr-panel {
           grid-column: 3;
           position: sticky;
-          top: calc(100vh - 282px);
+          top: calc(100vh - 340px);
           align-self: start;
           width: 200px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 18px;
-          margin-top: calc(100vh - 282px);
+          gap: 14px;
+          margin-top: calc(100vh - 340px);
         }
 
         .qr-card {
@@ -630,7 +644,8 @@
           padding: 24px;
           border-radius: 14px;
           background: #fff;
-          box-shadow: var(--shadow);
+          border: 1px solid var(--line);
+          box-shadow: none;
         }
 
         .qr-card img {
@@ -647,24 +662,49 @@
           line-height: 1.45;
         }
 
+        .qr-store-links {
+          width: 100%;
+          display: grid;
+          gap: 8px;
+        }
+
+        .qr-store-links a {
+          min-height: 42px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          background: #171614;
+          color: #fff;
+          font-size: 0.84rem;
+          font-weight: 900;
+        }
+
+        .qr-store-links a.secondary {
+          border: 1px solid var(--line);
+          background: #fff;
+          color: #4f463d;
+        }
+
         .app-page {
           grid-column: 2;
           margin: 0;
-          box-shadow: 0 0 0 1px rgba(216, 207, 193, 0.75);
+          max-width: 520px;
+          box-shadow: 0 0 0 1px var(--line);
         }
       }
 
       @media (min-width: 960px) and (max-width: 1320px) {
         .layout {
-          grid-template-columns: minmax(360px, 1fr) 480px 176px;
+          grid-template-columns: minmax(360px, 1fr) 500px 176px;
           column-gap: 24px;
           padding: 0 18px;
         }
 
         .qr-panel {
           width: 176px;
-          top: calc(100vh - 258px);
-          margin-top: calc(100vh - 258px);
+          top: calc(100vh - 316px);
+          margin-top: calc(100vh - 316px);
         }
 
         .qr-card {
@@ -736,7 +776,7 @@
               <option value="de">Deutsch</option>
               <option value="pt">Português</option>
             </select>
-            <a class="header-action" href="./support.html" data-i18n="supportShort">지원</a>
+            <a class="header-action store-link" href="https://play.google.com/store/apps/details?id=com.labhub.fate" data-i18n="installShort">설치</a>
           </div>
         </header>
 
@@ -880,6 +920,7 @@
             </div>
             <div class="link-card">
               <a href="./private-policy.html" data-i18n="privacyPolicy">개인정보처리방침</a>
+              <a class="store-link-row" href="https://play.google.com/store/apps/details?id=com.labhub.fate" data-i18n="googlePlay">Google Play</a>
               <a href="./support.html" data-i18n="supportPage">지원 페이지</a>
               <a href="mailto:qnqnqnckck@gmail.com" data-i18n="contactDeveloper">개발자에게 문의</a>
             </div>
@@ -892,10 +933,14 @@
       </section>
 
       <aside class="qr-panel" aria-label="운명 마케팅 URL QR">
-        <a class="qr-card" href="./" aria-label="운명 마케팅 페이지 열기">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=148x148&amp;margin=8&amp;data=https%3A%2F%2Fqnqnckck.github.io%2Fgoogle-privacy%2Ffate%2F" alt="운명 마케팅 페이지 QR 코드">
+        <a class="qr-card" href="https://play.google.com/store/apps/details?id=com.labhub.fate" aria-label="운명 Google Play 열기">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=148x148&amp;margin=8&amp;data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.labhub.fate" alt="운명 Google Play QR 코드">
         </a>
-        <span>Marketing URL<br>qnqnckck.github.io/google-privacy/fate/</span>
+        <div class="qr-store-links" aria-label="스토어 및 페이지 링크">
+          <a href="https://play.google.com/store/apps/details?id=com.labhub.fate">Google Play</a>
+          <a class="secondary" href="./">Marketing URL</a>
+        </div>
+        <span>QR scan<br>Google Play로 바로 이동</span>
       </aside>
     </main>
     <script>
@@ -903,9 +948,11 @@
         ko: {
           appName: "운명",
           supportShort: "지원",
+          installShort: "설치",
           supportPage: "지원 페이지",
           privacyPolicy: "개인정보처리방침",
           contactDeveloper: "개발자에게 문의",
+          googlePlay: "Google Play",
           asideIntro: "나를 위한 운세를 한 곳에서 확인하는 앱",
           asideLine1: "사주부터 팬심까지",
           asideLine2: "매일의 운세를",
@@ -948,9 +995,11 @@
         en: {
           appName: "Fate",
           supportShort: "Support",
+          installShort: "Install",
           supportPage: "Support",
           privacyPolicy: "Privacy Policy",
           contactDeveloper: "Contact Developer",
+          googlePlay: "Google Play",
           asideIntro: "All your personal fortune readings in one app",
           asideLine1: "From saju to fandom",
           asideLine2: "check your daily flow",
