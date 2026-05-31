@@ -49,6 +49,14 @@ App Store Connect의 Marketing URL과 AdMob app-ads.txt 검증에 사용할 공�
 - Error States: GitHub Pages project path에만 파일이 있으면 `https://qnqnckck.github.io/app-ads.txt` 루트 검증에는 충분하지 않을 수 있다.
 - Acceptance Criteria: 파일 내용이 `google.com, pub-4069445075453135, DIRECT, f08c47fec0942fa0`와 정확히 일치한다.
 
+### Store Download Router
+
+- Purpose: 하나의 QR 링크에서 Android 사용자는 Google Play로, iOS 사용자는 App Store로 이동하게 한다.
+- User Interaction Flow: 사용자가 QR을 스캔하면 `publicofferingshares/download.html`에 도착하고, 기기 종류에 따라 스토어로 자동 이동한다.
+- Data/State Changes: 정적 HTML 라우터 파일만 추가된다.
+- Error States: 스토어 URL이 변경되면 `download.html`의 iOS/Android 상수와 마케팅 페이지 버튼 링크를 함께 갱신해야 한다.
+- Acceptance Criteria: QR 링크, App Store 버튼, Google Play 버튼, 수동 fallback 링크가 모두 존재한다.
+
 ## Wireframe
 
 ```text
