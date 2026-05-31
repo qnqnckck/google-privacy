@@ -58,6 +58,10 @@
         display: none;
       }
 
+      .download-panel {
+        display: none;
+      }
+
       .app-page {
         width: 100%;
         min-width: 320px;
@@ -552,19 +556,21 @@
       @media (min-width: 960px) {
         .layout {
           display: grid;
-          grid-template-columns: minmax(400px, 1fr) 480px minmax(24px, 1fr);
-          column-gap: 44px;
+          grid-template-columns: minmax(420px, 540px) 480px 220px;
+          column-gap: 40px;
           align-items: stretch;
+          justify-content: center;
         }
 
         .aside {
+          grid-column: 1;
           position: sticky;
           top: 0;
           height: 100vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 56px 0 56px max(48px, calc((100vw - 1180px) / 2));
+          padding: 56px 0;
         }
 
         .aside-logo {
@@ -621,15 +627,16 @@
         }
 
         .download-panel {
-          position: fixed;
-          left: calc(50% + 310px);
-          bottom: 88px;
-          z-index: 30;
+          grid-column: 3;
+          position: sticky;
+          top: calc(100vh - 336px);
+          align-self: start;
           width: 200px;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 12px;
+          margin-top: calc(100vh - 336px);
           padding: 16px;
           border-radius: 12px;
           background: var(--surface);
@@ -730,10 +737,13 @@
       }
 
       @media (min-width: 960px) and (max-width: 1320px) {
+        .layout {
+          grid-template-columns: minmax(360px, 1fr) 480px 176px;
+          column-gap: 24px;
+          padding: 0 18px;
+        }
+
         .download-panel {
-          left: auto;
-          right: 18px;
-          bottom: 72px;
           width: 176px;
         }
 
@@ -775,21 +785,6 @@
         <div class="aside-actions">
           <a href="./support.html">지원 페이지</a>
           <a href="./private-policy.html">개인정보처리방침</a>
-        </div>
-        <div class="download-panel" aria-label="공모주비서 다운로드 링크">
-          <a class="qr-card" href="./download.html" aria-label="공모주비서 다운로드 QR 링크">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&amp;margin=8&amp;data=https%3A%2F%2Fqnqnckck.github.io%2Fgoogle-privacy%2Fpublicofferingshares%2Fdownload.html" alt="공모주비서 다운로드 QR 코드">
-          </a>
-          <div class="store-links">
-            <div>
-              <strong>스토어에서 공모주비서 받기</strong>
-              <span>QR 하나로 기기에 맞는 스토어로 이동합니다.</span>
-            </div>
-            <div class="store-button-row">
-              <a class="store-button" href="https://apps.apple.com/kr/app/id6764863997">App Store</a>
-              <a class="store-button android" href="https://play.google.com/store/apps/details?id=com.yellowrocket.publicofferingshares&amp;hl=ko">Google Play</a>
-            </div>
-          </div>
         </div>
         <div class="aside-note">
           <strong>App Store Marketing URL용 공식 소개 페이지</strong>
@@ -1013,6 +1008,22 @@
           </footer>
         </div>
       </section>
+
+      <aside class="download-panel" aria-label="공모주비서 다운로드 링크">
+        <a class="qr-card" href="./download.html" aria-label="공모주비서 다운로드 QR 링크">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&amp;margin=8&amp;data=https%3A%2F%2Fqnqnckck.github.io%2Fgoogle-privacy%2Fpublicofferingshares%2Fdownload.html" alt="공모주비서 다운로드 QR 코드">
+        </a>
+        <div class="store-links">
+          <div>
+            <strong>스토어에서 공모주비서 받기</strong>
+            <span>QR 하나로 기기에 맞는 스토어로 이동합니다.</span>
+          </div>
+          <div class="store-button-row">
+            <a class="store-button" href="https://apps.apple.com/kr/app/id6764863997">App Store</a>
+            <a class="store-button android" href="https://play.google.com/store/apps/details?id=com.yellowrocket.publicofferingshares&amp;hl=ko">Google Play</a>
+          </div>
+        </div>
+      </aside>
     </main>
   </body>
 </html>

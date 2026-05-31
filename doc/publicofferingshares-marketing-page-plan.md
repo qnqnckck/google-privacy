@@ -56,7 +56,7 @@ App Store Connect의 Marketing URL과 AdMob app-ads.txt 검증에 사용할 공�
 - Data/State Changes: 정적 HTML 라우터 파일만 추가된다.
 - Error States: 스토어 URL이 변경되면 `download.html`의 iOS/Android 상수와 마케팅 페이지 버튼 링크를 함께 갱신해야 한다.
 - Acceptance Criteria: QR 링크, App Store 버튼, Google Play 버튼, 수동 fallback 링크가 모두 존재한다.
-- Placement: 데스크톱에서는 점신 참고처럼 앱 화면 오른쪽 하단에 고정된 다운로드 박스로 배치한다.
+- Placement: 데스크톱에서는 점신 참고처럼 설명 영역, 480px 앱 화면, QR 다운로드 영역을 3컬럼 비율로 배치한다.
 
 ## Wireframe
 
