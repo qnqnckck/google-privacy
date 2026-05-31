@@ -277,7 +277,9 @@
       }
 
       .screen-card {
-        padding: 18px;
+        padding: 20px;
+        border-radius: 28px;
+        background: #f8fafc;
       }
 
       .screen-card + .screen-card {
@@ -289,12 +291,13 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 14px;
+        margin-bottom: 16px;
       }
 
       .screen-head strong {
         display: block;
-        font-size: 1.05rem;
+        font-size: 1.22rem;
+        color: #111827;
       }
 
       .screen-head span {
@@ -306,20 +309,33 @@
       }
 
       .badge {
-        min-height: 28px;
+        min-height: 34px;
         display: inline-flex;
         align-items: center;
-        padding: 0 9px;
+        padding: 0 12px;
         border-radius: 999px;
-        background: var(--yellow);
-        font-size: 0.76rem;
+        border: 1px solid #f6ce38;
+        background: #fff8dc;
+        font-size: 0.78rem;
         font-weight: 900;
         white-space: nowrap;
       }
 
+      .real-screen {
+        border-radius: 28px;
+        overflow: hidden;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+      }
+
+      .real-screen img {
+        width: 100%;
+        display: block;
+      }
+
       .dashboard-panel {
         padding: 15px;
-        border-radius: 12px;
+        border-radius: 18px;
         background: #1f2024;
         color: #fff;
       }
@@ -345,23 +361,25 @@
 
       .list-item {
         display: grid;
-        grid-template-columns: 42px 1fr auto;
-        gap: 10px;
+        grid-template-columns: 50px 1fr auto;
+        gap: 12px;
         align-items: center;
-        min-height: 62px;
-        padding: 10px;
-        border-radius: 12px;
-        background: var(--surface-soft);
+        min-height: 78px;
+        padding: 13px;
+        border-radius: 22px;
+        background: var(--surface);
+        border: 1px solid #e5e7eb;
       }
 
       .list-icon {
-        width: 42px;
-        height: 42px;
+        width: 50px;
+        height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 50%;
-        background: var(--yellow);
+        border-radius: 16px;
+        background: #fff7c2;
+        border: 1px solid #ffe58b;
         font-size: 0.82rem;
         font-weight: 900;
       }
@@ -396,14 +414,14 @@
 
       .calendar-grid {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 6px;
       }
 
       .dow,
       .day {
-        min-height: 36px;
-        border-radius: 10px;
+        min-height: 54px;
+        border-radius: 14px;
         font-size: 0.7rem;
         font-weight: 900;
       }
@@ -417,7 +435,8 @@
 
       .day {
         padding: 6px;
-        background: var(--surface-soft);
+        background: var(--surface);
+        border: 1px solid #e5e7eb;
       }
 
       .event {
@@ -436,9 +455,10 @@
       .listing { background: var(--orange-soft); color: #92400e; }
 
       .bar-card {
-        padding: 14px;
-        border-radius: 12px;
-        background: var(--surface-soft);
+        padding: 16px;
+        border-radius: 20px;
+        background: var(--surface);
+        border: 1px solid #e5e7eb;
       }
 
       .bar-card + .bar-card {
@@ -846,8 +866,21 @@
             <article class="screen-card">
               <div class="screen-head">
                 <div>
+                  <strong>실제 앱 화면</strong>
+                  <span>실적 추가/수정 리스트와 선택 상태</span>
+                </div>
+                <span class="badge">Actual</span>
+              </div>
+              <div class="real-screen">
+                <img src="./assets/app-screen-record.png" alt="공모주비서 실제 앱 화면">
+              </div>
+            </article>
+
+            <article class="screen-card">
+              <div class="screen-head">
+                <div>
                   <strong>공모주 대시보드</strong>
-                  <span>열린 청약과 가까운 상장 일정</span>
+                  <span>앱의 카드형 지표와 가까운 일정</span>
                 </div>
                 <span class="badge">Home</span>
               </div>
@@ -859,18 +892,18 @@
                 <div class="list-item">
                   <div class="list-icon">청</div>
                   <div>
-                    <strong>에이치엠씨아이비스팩</strong>
-                    <span>청약 05.30-05.31 · KB증권</span>
+                    <strong>마키나락스</strong>
+                    <span>2026.05.11 · 미래에셋증권, 현대차증권</span>
                   </div>
                   <div class="value">D-1</div>
                 </div>
                 <div class="list-item">
                   <div class="list-icon">상</div>
                   <div>
-                    <strong>테크리더스</strong>
-                    <span>상장 예정 · 수요예측 완료</span>
+                    <strong>플레드</strong>
+                    <span>2026.05.04 · NH투자증권</span>
                   </div>
-                  <div class="value">+18%</div>
+                  <div class="value">상장</div>
                 </div>
               </div>
             </article>
@@ -888,21 +921,17 @@
                 <span class="value">월간</span>
               </div>
               <div class="calendar-grid">
-                <div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div><div class="dow">토</div><div class="dow">일</div>
-                <div class="day">4</div>
+                <div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div>
+                <div class="day">4<span class="event sub">청약</span></div>
                 <div class="day">5<span class="event sub">청약</span></div>
                 <div class="day">6</div>
                 <div class="day">7<span class="event refund">환불</span></div>
                 <div class="day">8</div>
-                <div class="day">9</div>
-                <div class="day">10</div>
                 <div class="day">11<span class="event listing">상장</span></div>
                 <div class="day">12</div>
                 <div class="day">13<span class="event sub">수요</span></div>
                 <div class="day">14</div>
                 <div class="day">15<span class="event refund">환불</span></div>
-                <div class="day">16</div>
-                <div class="day">17</div>
               </div>
             </article>
 
@@ -930,34 +959,6 @@
                     <span>공모가 밴드 상단 확정</span>
                   </div>
                   <div class="value">확정</div>
-                </div>
-              </div>
-            </article>
-
-            <article class="screen-card">
-              <div class="screen-head">
-                <div>
-                  <strong>포트폴리오 기록</strong>
-                  <span>배정, 매도, 손익을 저장</span>
-                </div>
-                <span class="badge">Record</span>
-              </div>
-              <div class="list">
-                <div class="list-item">
-                  <div class="list-icon">배</div>
-                  <div>
-                    <strong>배정 2주 · 매도 완료</strong>
-                    <span>수수료 반영 손익 계산</span>
-                  </div>
-                  <div class="value">+42,000</div>
-                </div>
-                <div class="list-item">
-                  <div class="list-icon">알</div>
-                  <div>
-                    <strong>상장 D-1 알림</strong>
-                    <span>청약·환불·상장 알림 관리</span>
-                  </div>
-                  <div class="value">ON</div>
                 </div>
               </div>
             </article>

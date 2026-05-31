@@ -92,3 +92,9 @@ App Store Connect의 Marketing URL과 AdMob app-ads.txt 검증에 사용할 공�
 - App-code mapping: `공모주 대시보드`, `공모주 일정`, `청약 리포트`, `포트폴리오/알림` 화면을 정적 mock screenshot으로 표현한다.
 - Reusable UI primitives: phone frame, dashboard list item, calendar day/event pill, report metric bar, portfolio chart, notification toggle.
 - Risk: 실제 캡처 이미지는 아니므로, "앱 화면 예시"로만 표현하고 앱에 없는 기능을 추가로 암시하지 않는다.
+
+## Visual Direction Update 3
+
+- App consistency: 마케팅 페이지의 화면 예시는 앱 코드의 `_KakaoTone` 색상, 16-28px 카드 반경, 노란 선택 상태, 큰 리스트 카드 구조를 따른다.
+- Real proof: `doc/device-check/publicofferingshares_ui_check_2.png`를 `publicofferingshares/assets/app-screen-record.png`로 복사해 실제 앱 화면을 첫 미리보기로 사용한다.
+- Support/legal consistency: `support.html`과 `private-policy.html`도 같은 480px 앱형 레이아웃, sticky header, yellow CTA, card/list primitives로 맞춘다.
