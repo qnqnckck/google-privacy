@@ -75,3 +75,11 @@ App Store Connect의 Marketing URL과 AdMob app-ads.txt 검증에 사용할 공�
 - Material direction: 노란 앱 아이콘 색상은 포인트로만 사용하고, 배경은 밝은 종이색과 짙은 잉크색을 섞어 금융 앱처럼 안정적으로 보이게 한다.
 - Reusable UI primitives: memo chip, calendar tile, status rail, assistant note, compact feature panel.
 - Risk: 투자 성과를 보장하는 표현은 피하고, 일정 관리와 기록 보조 도구임을 명확히 유지한다.
+
+## Visual Direction Update 2
+
+- Reference adjustment: 점신형 "왼쪽 브랜드 메시지 + 오른쪽 모바일 앱 화면"을 그대로 좁은 480px 프레임에 가두지 않고, 데스크톱에서는 1360px 폭을 적극 활용한다.
+- Structure: 좌측에는 앱 가치와 CTA, 우측에는 실제 앱 코드의 주요 화면 축을 반영한 4개 스크린 월을 배치한다.
+- App-code mapping: `공모주 대시보드`, `공모주 일정`, `청약 리포트`, `포트폴리오/알림` 화면을 정적 mock screenshot으로 표현한다.
+- Reusable UI primitives: phone frame, dashboard list item, calendar day/event pill, report metric bar, portfolio chart, notification toggle.
+- Risk: 실제 캡처 이미지는 아니므로, "앱 화면 예시"로만 표현하고 앱에 없는 기능을 추가로 암시하지 않는다.
