@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex">
     <title>공모주비서 다운로드</title>
+    <script>
+      const IOS_URL = "https://apps.apple.com/kr/app/id6764863997";
+      const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.yellowrocket.publicofferingshares&hl=ko";
+
+      function storeUrlForDevice() {
+        const ua = navigator.userAgent || "";
+        const platform = navigator.platform || "";
+        const isAndroid = /Android/i.test(ua);
+        const isIOS = /iPhone|iPad|iPod/i.test(ua) || (platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        if (isAndroid) return ANDROID_URL;
+        if (isIOS) return IOS_URL;
+        return null;
+      }
+
+      const targetStoreUrl = storeUrlForDevice();
+      if (targetStoreUrl) {
+        window.location.replace(targetStoreUrl);
+      }
+    </script>
     <style>
       :root {
         color-scheme: light;
@@ -87,27 +106,6 @@
         color: var(--ink);
       }
     </style>
-    <script>
-      const IOS_URL = "https://apps.apple.com/kr/app/id6764863997";
-      const ANDROID_URL = "https://play.google.com/store/apps/details?id=com.yellowrocket.publicofferingshares&hl=ko";
-
-      function redirectToStore() {
-        const ua = navigator.userAgent || "";
-        const platform = navigator.platform || "";
-        const isAndroid = /Android/i.test(ua);
-        const isIOS = /iPhone|iPad|iPod/i.test(ua) || (platform === "MacIntel" && navigator.maxTouchPoints > 1);
-
-        if (isAndroid) {
-          window.location.replace(ANDROID_URL);
-          return;
-        }
-        if (isIOS) {
-          window.location.replace(IOS_URL);
-        }
-      }
-
-      window.addEventListener("load", redirectToStore);
-    </script>
   </head>
   <body>
     <main>
