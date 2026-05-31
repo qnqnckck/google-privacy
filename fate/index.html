@@ -338,12 +338,17 @@
 
       .badge {
         height: 34px;
+        min-width: 64px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         padding: 0 12px;
         border: 1px solid #ded9cf;
         background: #f2f1ed;
         color: #4e4a43;
         font-size: 0.78rem;
-        transform: translateY(1px);
+        line-height: 1;
+        transform: none;
       }
 
       .phone-shot {
@@ -828,7 +833,7 @@
                 <span class="badge">Home</span>
               </div>
               <div class="phone-shot">
-                <img src="./assets/store-1.png" alt="운명 앱 홈 화면과 주요 운세 기능">
+                <img src="./assets/screens/ko/1.png" alt="운명 앱 홈 화면과 주요 운세 기능" data-screen-index="1">
               </div>
             </article>
 
@@ -842,22 +847,22 @@
               </div>
               <div class="store-grid">
                 <div class="store-shot">
-                  <img src="./assets/store-2.png" alt="운명 앱 팬심과 출석 체크 화면">
+                  <img src="./assets/screens/ko/2.png" alt="운명 앱 팬심과 출석 체크 화면" data-screen-index="2">
                 </div>
                 <div class="store-shot">
-                  <img src="./assets/store-3.png" alt="운명 앱 오늘의 운세 화면">
+                  <img src="./assets/screens/ko/3.png" alt="운명 앱 오늘의 운세 화면" data-screen-index="3">
                 </div>
                 <div class="store-shot">
-                  <img src="./assets/store-4.png" alt="운명 앱 주역과 별자리 화면">
+                  <img src="./assets/screens/ko/4.png" alt="운명 앱 주역과 별자리 화면" data-screen-index="4">
                 </div>
                 <div class="store-shot">
-                  <img src="./assets/store-5.png" alt="운명 앱 궁합 화면">
+                  <img src="./assets/screens/ko/5.png" alt="운명 앱 궁합 화면" data-screen-index="5">
                 </div>
                 <div class="store-shot">
-                  <img src="./assets/store-6.png" alt="운명 앱 전생 화면">
+                  <img src="./assets/screens/ko/6.png" alt="운명 앱 전생 화면" data-screen-index="6">
                 </div>
                 <div class="store-shot">
-                  <img src="./assets/store-7.png" alt="운명 앱 홈화면 위젯 화면">
+                  <img src="./assets/screens/ko/7.png" alt="운명 앱 홈화면 위젯 화면" data-screen-index="7">
                 </div>
               </div>
             </article>
@@ -1190,15 +1195,21 @@
 
       const select = document.getElementById("languageSelect");
       const buttons = [...document.querySelectorAll("[data-lang-button]")];
+      const localizedScreenLangs = new Set(["ko", "en", "ja", "zh", "es", "fr", "de", "pt"]);
+      const screenImages = [...document.querySelectorAll("[data-screen-index]")];
 
       function applyLanguage(lang) {
         const copy = translations[lang] || translations.ko;
+        const screenLang = localizedScreenLangs.has(lang) ? lang : "ko";
         document.documentElement.lang = lang;
         document.querySelectorAll("[data-i18n]").forEach((node) => {
           const key = node.dataset.i18n;
           if (copy[key]) {
             node.textContent = copy[key];
           }
+        });
+        screenImages.forEach((image) => {
+          image.src = `./assets/screens/${screenLang}/${image.dataset.screenIndex}.png`;
         });
         if (select) {
           select.value = lang;
