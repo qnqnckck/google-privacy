@@ -309,15 +309,18 @@
       }
 
       .badge {
-        min-height: 34px;
+        height: 34px;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         padding: 0 12px;
         border-radius: 999px;
         border: 1px solid #f6ce38;
         background: #fff8dc;
+        color: var(--ink);
         font-size: 0.78rem;
         font-weight: 900;
+        line-height: 1;
         white-space: nowrap;
       }
 
@@ -412,47 +415,94 @@
         font-weight: 900;
       }
 
-      .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 6px;
+      .calendar-preview {
+        overflow: hidden;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        background: #fff;
       }
 
-      .dow,
-      .day {
-        min-height: 54px;
-        border-radius: 14px;
-        font-size: 0.7rem;
+      .calendar-weekdays {
+        display: flex;
+        border-bottom: 1px solid rgba(156, 163, 175, 0.28);
+      }
+
+      .calendar-weekdays span {
+        flex: 1;
+        padding: 8px 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.72rem;
         font-weight: 900;
       }
 
-      .dow {
+      .calendar-week {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        min-height: 78px;
+        border-bottom: 1px solid rgba(156, 163, 175, 0.28);
+      }
+
+      .calendar-week:last-child {
+        border-bottom: 0;
+      }
+
+      .calendar-day {
+        position: relative;
+        padding: 5px;
+        border-right: 1px solid rgba(156, 163, 175, 0.26);
+        color: #111827;
+        font-size: 0.72rem;
+        font-weight: 900;
+      }
+
+      .calendar-day:last-child {
+        border-right: 0;
+      }
+
+      .calendar-day.today {
+        background: #e8f8ef;
+        box-shadow: inset 0 0 0 1px #8ed6ae;
+      }
+
+      .calendar-lane {
+        position: absolute;
+        left: calc(var(--start) * 20%);
+        top: var(--top);
+        width: calc(var(--span) * 20%);
+        height: 14px;
+        padding: 0 5px;
+        border-radius: 999px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        color: var(--muted);
-      }
-
-      .day {
-        padding: 6px;
-        background: var(--surface);
-        border: 1px solid #e5e7eb;
-      }
-
-      .event {
-        display: block;
-        margin-top: 5px;
-        padding: 3px 5px;
-        border-radius: 999px;
+        gap: 4px;
         overflow: hidden;
-        text-overflow: ellipsis;
+        color: #fff;
+        font-size: 0.57rem;
+        font-weight: 900;
+        line-height: 1;
         white-space: nowrap;
-        font-size: 0.6rem;
       }
 
-      .sub { background: var(--red-soft); color: #b42348; }
-      .refund { background: #cffafe; color: #0e7490; }
-      .listing { background: var(--orange-soft); color: #92400e; }
+      .calendar-lane::before {
+        content: attr(data-type);
+        width: 12px;
+        height: 12px;
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.92);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.18);
+        font-size: 0.46rem;
+        line-height: 1;
+      }
+
+      .sub { background: #f28b9a; }
+      .refund { background: #06b6d4; }
+      .listing { background: #f59e0b; }
 
       .bar-card {
         padding: 16px;
@@ -920,18 +970,28 @@
                 <strong>2026.05</strong>
                 <span class="value">월간</span>
               </div>
-              <div class="calendar-grid">
-                <div class="dow">월</div><div class="dow">화</div><div class="dow">수</div><div class="dow">목</div><div class="dow">금</div>
-                <div class="day">4<span class="event sub">청약</span></div>
-                <div class="day">5<span class="event sub">청약</span></div>
-                <div class="day">6</div>
-                <div class="day">7<span class="event refund">환불</span></div>
-                <div class="day">8</div>
-                <div class="day">11<span class="event listing">상장</span></div>
-                <div class="day">12</div>
-                <div class="day">13<span class="event sub">수요</span></div>
-                <div class="day">14</div>
-                <div class="day">15<span class="event refund">환불</span></div>
+              <div class="calendar-preview">
+                <div class="calendar-weekdays">
+                  <span>월</span><span>화</span><span>수</span><span>목</span><span>금</span>
+                </div>
+                <div class="calendar-week">
+                  <div class="calendar-day">4</div>
+                  <div class="calendar-day">5</div>
+                  <div class="calendar-day">6</div>
+                  <div class="calendar-day">7</div>
+                  <div class="calendar-day">8</div>
+                  <span class="calendar-lane sub" style="--start:0; --span:2; --top:20px" data-type="청">마키나락스</span>
+                  <span class="calendar-lane refund" style="--start:3; --span:1; --top:38px" data-type="환">환불일</span>
+                </div>
+                <div class="calendar-week">
+                  <div class="calendar-day">11</div>
+                  <div class="calendar-day today">12</div>
+                  <div class="calendar-day">13</div>
+                  <div class="calendar-day">14</div>
+                  <div class="calendar-day">15</div>
+                  <span class="calendar-lane listing" style="--start:0; --span:1; --top:20px" data-type="상">플레드</span>
+                  <span class="calendar-lane sub" style="--start:2; --span:2; --top:38px" data-type="청">코스모로보틱스</span>
+                </div>
               </div>
             </article>
 
