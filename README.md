@@ -11,6 +11,9 @@
 - `https://qnqnckck.github.io/google-privacy/publicofferingshares/support.html`
 - `https://qnqnckck.github.io/google-privacy/fate/private-policy.html`
 - `https://qnqnckck.github.io/google-privacy/fate/support.html`
+- `https://qnqnckck.github.io/google-privacy/drawing-playground/`
+- `https://qnqnckck.github.io/google-privacy/drawing-playground/support.html`
+- `https://qnqnckck.github.io/google-privacy/drawing-playground/private-policy.html`
 
 ## 목적
 
@@ -23,5 +26,8 @@
 - `publicofferingshares/support.html` - 앱 지원 페이지
 - `fate/private-policy.html` - 운명 다국어 개인정보처리방침 페이지
 - `fate/support.html` - 운명 다국어 지원 페이지
+- `drawing-playground/index.html` - Drawing Playground 앱 소개 페이지
+- `drawing-playground/support.html` - Drawing Playground 지원 페이지
+- `drawing-playground/private-policy.html` - Drawing Playground 한국어/영어 개인정보처리방침
 - `doc/mvp-plan.md` - 계획 문서
 - `doc/fate-privacy-policy-plan.md` - 운명 다국어 개인정보처리방침 계획 문서
