@@ -14,6 +14,9 @@
 - `https://qnqnckck.github.io/google-privacy/drawing-playground/`
 - `https://qnqnckck.github.io/google-privacy/drawing-playground/support.html`
 - `https://qnqnckck.github.io/google-privacy/drawing-playground/private-policy.html`
+- `https://qnqnckck.github.io/google-privacy/today-margin/`
+- `https://qnqnckck.github.io/google-privacy/today-margin/support.html`
+- `https://qnqnckck.github.io/google-privacy/today-margin/private-policy.html`
 
 ## 목적
 
@@ -29,5 +32,8 @@
 - `drawing-playground/index.html` - Drawing Playground 앱 소개 페이지
 - `drawing-playground/support.html` - Drawing Playground 지원 페이지
 - `drawing-playground/private-policy.html` - Drawing Playground 한국어/영어 개인정보처리방침
+- `today-margin/index.html` - 오늘남김 소개 페이지
+- `today-margin/support.html` - 오늘남김 지원 페이지
+- `today-margin/private-policy.html` - 오늘남김 한국어/영어 개인정보처리방침
 - `doc/mvp-plan.md` - 계획 문서
 - `doc/fate-privacy-policy-plan.md` - 운명 다국어 개인정보처리방침 계획 문서
