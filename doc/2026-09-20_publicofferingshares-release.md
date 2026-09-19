@@ -30,4 +30,7 @@ router.html -> product -> stores
 
 ## Verification
 
-Pending live deployment verification.
+- Source commit 8083f78, merged pre-existing remote Bible change without modifying it, pushed e7e51f2.
+- GitHub Pages run 35473081665 succeeded; browser confirmed new product/support text and privacy date 2026-09-20.
+- Router, product, support and privacy checked at desktop and 390x844 mobile. Images load, no horizontal document overflow in scoped pages, no console errors.
+- HTTPS router/product/support/privacy/download and app-icon/app-screen-record URLs return successfully.
