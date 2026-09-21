@@ -32,4 +32,7 @@ Support -> existing help topics -> before contacting
 
 ## Results
 
-Pending live verification.
+- Scoped source commit `e622d72` pushed to main; GitHub Pages run `35550526669` succeeded.
+- Browser reload of the public support URL shows both new checklist items.
+- Router entry and app icon, product/support/privacy and download links verified on public HTTPS pages. Product, support and privacy inspected at desktop and 390x844 mobile widths; no horizontal document overflow, broken app images or captured console errors in the checked pages. Router carousel retains its intentional horizontal scroll.
+- Existing approved artwork, policy date and other apps remain unchanged.
